@@ -131,15 +131,16 @@ class Header extends React.Component {
                     <li><a href="http://www.google.com">HOW IT WORKS</a></li>
                     <li><a href="http://www.google.com">PRICING</a></li>
                     <li><a href="http://www.google.com">AGENCY SERVICE</a></li>
-                    <li><a href="http://www.google.com">ACTIVE CONTESTS</a></li>
+                    {this.props.data?.role !== CONSTANTS.CUSTOMER && this.props.data?.role !== CONSTANTS.CREATOR &&
+                      <li>
+                        <Link to='/registration'> BECOME A CREATIVE </Link>
+                      </li>}
+                    {(this.props.data?.role === CONSTANTS.CUSTOMER || this.props.data?.role === CONSTANTS.CREATOR) &&
+                      <li>
+                        <Link to='/dashboard'> ACTIVE CONTESTS </Link>
+                      </li>}
                     <li><a href="http://www.google.com">WINNERS</a></li>
-                    <li><a href="http://www.google.com">LEADERBOARD</a></li>
-                    <li className={styles.last}>
-                      <a href="http://www.google.com">
-                        BECOME A
-                        CREATIVE
-                      </a>
-                    </li>
+                    <li className={styles.last}><a href="http://www.google.com">LEADERBOARD</a></li>
                   </ul>
                 </li>
                 <li>

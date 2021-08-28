@@ -25,7 +25,7 @@ const Home = (props) => {
     };
   });
 
-  const { isFetching } = props;
+  const { isFetching, data } = props;
   const text = CONSTANTS.HEADER_ANIMATION_TEXT[index % CONSTANTS.HEADER_ANIMATION_TEXT.length];
   return (
     <>
@@ -45,7 +45,8 @@ const Home = (props) => {
                 available for immediate purchase
               </p>
               <div className={styles.button}>
-                <Link className={styles.button__link} to="/dashboard">DASHBOARD</Link>
+                <Link className={styles.button__link}
+                  to={(data?.role !== CONSTANTS.CUSTOMER && data?.role !== CONSTANTS.CREATOR) ? "/login" : "/dashboard"}>DASHBOARD</Link>
               </div>
             </div>
             <div className={styles.greyContainer}>
@@ -65,7 +66,7 @@ const Home = (props) => {
                     name ideas from world's largest community of naming experts.
                     With 75,000+ creatives and 15,000+ successful naming projects,
                     Squadhelp is by far the largest naming platform across the globe .
-</p>
+                  </p>
                 </div>
                 <div className={styles.card}>
                   <img
@@ -78,7 +79,7 @@ const Home = (props) => {
                     we ensure that you receive more ideas from our top-quality creatives,
                     and Gamification best practices ensure two-way communication throughout your
                     contest.
-</p>
+                  </p>
                 </div>
                 <div className={styles.card}>
                   <img
@@ -91,7 +92,7 @@ const Home = (props) => {
                     demographics to get unbiased feedback on your favorite names.
                     Also receive Trademark support from our team of Licensed Trademark Attorneys,
                     so you can pick your name with confidence.
-</p>
+                  </p>
                 </div>
               </div>
             </div>
@@ -146,9 +147,9 @@ const Home = (props) => {
                   <p>
                     <i className="fas fa-check" />
                     <span>
-                        We’ll walk you through exactly what you need to share about your project
-                        in order to get an awesome Name
-</span>
+                      We’ll walk you through exactly what you need to share about your project
+                      in order to get an awesome Name
+                    </span>
                   </p>
                 </div>
                 <img src={`${CONSTANTS.STATIC_IMAGES_PATH}gif/1-compressed.gif`} alt="compressed" />
@@ -204,7 +205,8 @@ const Home = (props) => {
               carouselType={carouselConstants.EXAMPLE_SLIDER}
             />
             <div className={styles.button}>
-              <Link className={styles.button__link} to="/dashboard">DASHBOARD</Link>
+              <Link className={styles.button__link}
+                to={(data?.role !== CONSTANTS.CUSTOMER && data?.role !== CONSTANTS.CREATOR) ? "/login" : "/dashboard"}>DASHBOARD</Link>
             </div>
             <div className={styles.blueContainer}>
               <h2 className={styles.whiteUnderline}>What our customers say</h2>
@@ -222,8 +224,8 @@ const Home = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { isFetching } = state.userStore;
-  return { isFetching };
+  const { isFetching, data } = state.userStore;
+  return { isFetching, data };
 };
 
 export default connect(mapStateToProps, null)(Home);
