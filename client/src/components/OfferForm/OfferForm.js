@@ -14,11 +14,12 @@ const OfferForm = (props) => {
     if (props.contestType === CONTANTS.LOGO_CONTEST) {
       return (
         <ImageUpload
-          name="offerData"
+          name="file"
           classes={{
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
             imgStyle: styles.imgStyle,
+            invisibleStyle: styles.invisibleStyle
           }}
         />
       );
@@ -44,28 +45,33 @@ const OfferForm = (props) => {
     const { contestId, contestType, customerId } = props;
     data.append('contestId', contestId);
     data.append('contestType', contestType);
-    data.append('offerData', values.offerData);
+    if (props.contestType === CONTANTS.LOGO_CONTEST) {
+      data.append('file', values.file);
+    } else {
+      data.append('offerData', values.offerData);
+    }
     data.append('customerId', customerId);
-    props.setNewOffer(data);
+    props.setNewOffer(data);    
     resetForm();
   };
 
-  const { valid, addOfferError, clearOfferError } = props;
+  const { addOfferError, clearOfferError } = props;
   const validationSchema = props.contestType === CONTANTS.LOGO_CONTEST ? Schems.LogoOfferSchema : Schems.TextOfferSchema;
   return (
     <div className={styles.offerContainer}>
       {addOfferError
-            && <Error data={addOfferError.data} status={addOfferError.status} clearError={clearOfferError} />}
+        && <Error data={addOfferError.data} status={addOfferError.status} clearError={clearOfferError} />}
       <Formik
         onSubmit={setOffer}
         initialValues={{
           offerData: '',
+          file: ''
         }}
-        validationSchema={validationSchema}
+        validationSchema={validationSchema}      
       >
         <Form className={styles.form}>
           {renderOfferInput()}
-          {valid && <button type="submit" className={styles.btnOffer}>Send Offer</button>}
+          <button type="submit" className={styles.btnOffer}>Send Offer</button>
         </Form>
       </Formik>
     </div>

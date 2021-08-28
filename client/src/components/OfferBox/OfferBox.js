@@ -122,44 +122,41 @@ const OfferBox = (props) => {
               emptySymbol={(
                 <img
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
-                  alt="star-outline"
-                />
-)}
-              readonly
-            />
+                  alt="star-outline" />)}
+              readonly />
           </div>
         </div>
         <div className={styles.responseConainer}>
           {
-                        contestType === CONSTANTS.LOGO_CONTEST
-                          ? (
-                            <img
-                              onClick={() => props.changeShowImage({ imagePath: data.fileName, isShowOnFull: true })}
-                              className={styles.responseLogo}
-                              src={`${CONSTANTS.publicURL}${data.fileName}`}
-                              alt="logo"
-                            />
-                          )
-                          : <span className={styles.response}>{data.text}</span>
-                    }
+            contestType === CONSTANTS.LOGO_CONTEST
+              ? (
+                <img
+                  onClick={() => props.changeShowImage({ imagePath: data.fileName, isShowOnFull: true })}
+                  className={styles.responseLogo}
+                  src={`${CONSTANTS.publicURL}${data.fileName}`}
+                  alt="logo"
+                />
+              )
+              : <span className={styles.response}>{data.text}</span>
+          }
           {data.User.id !== id && (
-          <Rating
-            fractions={2}
-            fullSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt="star" />}
-            placeholderSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt="star" />}
-            emptySymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`} alt="star" />}
-            onClick={changeMark}
-            placeholderRating={data.mark}
-          />
+            <Rating
+              fractions={2}
+              fullSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt="star" />}
+              placeholderSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt="star" />}
+              emptySymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`} alt="star" />}
+              onClick={changeMark}
+              placeholderRating={data.mark}
+            />
           )}
         </div>
         {role !== CONSTANTS.CREATOR && <i onClick={goChat} className="fas fa-comments" />}
       </div>
       {props.needButtons(data.status) && (
-      <div className={styles.btnsContainer}>
-        <div onClick={resolveOffer} className={styles.resolveBtn}>Resolve</div>
-        <div onClick={rejectOffer} className={styles.rejectBtn}>Reject</div>
-      </div>
+        <div className={styles.btnsContainer}>
+          <div onClick={resolveOffer} className={styles.resolveBtn}>Resolve</div>
+          <div onClick={rejectOffer} className={styles.rejectBtn}>Reject</div>
+        </div>
       )}
     </div>
   );

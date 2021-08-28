@@ -30,7 +30,7 @@ const uploadContestFiles = multer({ storage: storageContestFiles }).array(
 const updateContestFile = multer({ storage: storageContestFiles }).single(
   'file');
 const uploadLogoFiles = multer({ storage: storageContestFiles }).single(
-  'offerData');
+  'file');
 
 module.exports.uploadAvatar = (req, res, next) => {
   uploadAvatars(req, res, (err) => {
@@ -52,6 +52,9 @@ module.exports.uploadContestFiles = (req, res, next) => {
     }
     return next();
   });
+  fs.readdirSync(devFilePath).map(fileName => {
+    console.log(path.join(devFilePath, fileName))
+  })
 };
 
 module.exports.updateContestFile = (req, res, next) => {
@@ -74,5 +77,8 @@ module.exports.uploadLogoFiles = (req, res, next) => {
     }
     return next();
   });
+  fs.readdirSync(devFilePath).map(fileName => {
+    console.log(path.join(devFilePath, fileName))
+  })
 };
 

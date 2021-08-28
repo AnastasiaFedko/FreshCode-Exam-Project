@@ -47,7 +47,6 @@ router.post(
 );
 
 // customerRouter
-// перенести в customerRouter, изменить на get
 router.get('/customersContests', contestController.getCustomersContests);
 
 // userRouter

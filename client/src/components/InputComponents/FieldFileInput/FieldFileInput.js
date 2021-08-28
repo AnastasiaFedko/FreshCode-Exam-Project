@@ -10,15 +10,8 @@ const FieldFileInput = ({ classes, ...rest }) => {
     <Field name={rest.name}>
       {(props) => {
         const {
-          field,
+          field, form
         } = props;
-
-        const getFileName = () => {
-          if (props.field.value) {
-            return props.field.value.name;
-          }
-          return '';
-        };
 
         return (
           <div className={fileUploadContainer}>
@@ -26,13 +19,13 @@ const FieldFileInput = ({ classes, ...rest }) => {
               Choose file
             </label>
             <span id="fileNameContainer" className={fileNameClass}>
-              {getFileName()}
+              {''}
             </span>
             <input
-              {...field}
               className={fileInput}
               id="fileInput"
               type="file"
+              onChange={(e)=>{form.setFieldValue(rest.name, e.target.files[0])}}
             />
           </div>
         );
