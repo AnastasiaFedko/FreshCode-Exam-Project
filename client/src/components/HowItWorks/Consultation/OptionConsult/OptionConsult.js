@@ -10,7 +10,7 @@ const OptionConsult = (props) => {
             p.push(item.text);
         }
         else if( item.link){
-            p.push(<a href={item.link.href}>{item.link.value}</a>);
+            p.push(<a key={Date.now()} href={item.link.href}>{item.link.value}</a>);
         }
         
     }

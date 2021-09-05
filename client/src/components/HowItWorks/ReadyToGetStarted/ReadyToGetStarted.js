@@ -3,7 +3,6 @@ import styles from './ReadyToGetStarted.module.sass';
 
 const ReadyToGetStarted = (props) => {
     const { classes } = props;
-    console.log(props)
 
     return (
         <div className={styles.mainGradient}>
@@ -12,7 +11,7 @@ const ReadyToGetStarted = (props) => {
                 <p>
                     Fill out your contest brief and begin receiving custom name suggestions within minutes.
                 </p>
-                <a className={classes.blueButton + ' ' + styles.startContest} href="/start-contest">Start A Contest</a>
+                <a className={classes.blueButton + ' ' + styles.startContest} href="/startContest">Start A Contest</a>
             </div>
         </div>
     );

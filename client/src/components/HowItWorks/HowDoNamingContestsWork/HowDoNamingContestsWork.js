@@ -9,12 +9,12 @@ const HowDoNamingContestsWork = (props) => {
             <hr />
             <div className={classes.space2}>
                 <div className={classes.space2Header}>
-                    <img src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/2.png`} />
+                    <img src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/2.png`} alt='2' />
                     <h2>How Do Naming Contests Work?</h2>
                 </div>
                 <div className={classes.space2Body}>
                     <div className={classes.stepsImgHolder}>
-                        <img src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/3.png`} />
+                        <img src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/3.png`} alt='3' />
                     </div>
                     <div className={classes.stepsHolder}>
                         <ul>

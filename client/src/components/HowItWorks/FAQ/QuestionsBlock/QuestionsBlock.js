@@ -8,7 +8,7 @@ const QuestionsBlock = (props) => {
 
     const blockQuestions = [];
     questions.forEach((q) => {
-        blockQuestions.push(<Question question={q.question} answer={q.answer} />)
+        blockQuestions.push(<Question key={`${Date.now()}${Math.floor(Math.random() * 1000)}`} question={q.question} answer={q.answer} />)
     });
 
     return (

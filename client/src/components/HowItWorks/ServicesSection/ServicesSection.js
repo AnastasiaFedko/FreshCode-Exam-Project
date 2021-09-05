@@ -14,6 +14,7 @@ const ServicesSection = (props) => {
                     <div className={classes.cardBlockContainer}>
                         <CardBlock 
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/4.png`}
+                        alt='4'
                         header='Launch a Contest'
                         body='Work with hundreds of creative experts to get custom name suggestions for your business or brand. All names are auto-checked for URL availability.'
                         buttonData='Launch a Contest'
@@ -21,6 +22,7 @@ const ServicesSection = (props) => {
                         imgIcon={classes.imgIcon}/>
                         <CardBlock 
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/5.png`}
+                        alt='5'
                         header='Explore Names For Sale'
                         body='Our branding team has curated thousands of pre-made names that you can purchase instantly. All names include a matching URL and a complimentary Logo Design'
                         buttonData='Explore Names For Sale'
@@ -28,6 +30,7 @@ const ServicesSection = (props) => {
                         imgIcon={classes.imgIcon}/>
                         <CardBlock 
                         src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/6.png`}
+                        alt='6'
                         header='Agency-level Managed Contests'
                         body='Our Managed contests combine the power of crowdsourcing with the rich experience of our branding consultants. Get a complete agency-level experience at a fraction of Agency costs'
                         buttonData='Learn More'

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Step.module.sass';
 
 const Step = (props) => {
-    const { classes, number, text } = props;
+    const { number, text } = props;
     return (
         <li>
             <div className={styles.step}>

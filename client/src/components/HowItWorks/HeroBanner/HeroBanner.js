@@ -22,7 +22,7 @@ const HeroBanner = (props) => {
                             </div>
                         </div>
                         <div className={classes.heroImgHolder}>
-                            <img src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/1.png`} />
+                            <img src={`${CONSTANTS.STATIC_IMAGES_PATH}/howitworks/1.png`} alt='1' />
                         </div>
                     </div>
                 </div>

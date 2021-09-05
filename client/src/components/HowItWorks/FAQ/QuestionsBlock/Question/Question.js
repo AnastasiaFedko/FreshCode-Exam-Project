@@ -7,14 +7,14 @@ const Question = (props) => {
 
     const [open, setOpen] = useState(false);
 
-    const createLink = (data) => (<a href={data.href}>{data.value}</a>)
+    const createLink = (data) => (<a key={`${Date.now()}${Math.floor(Math.random() * 1000)}`} href={data.href}>{data.value}</a>)
 
     const createUL = (data) => {
         const list = [];
         for (let i = 0; i < data.length; i++) {
             list.push(createLi(data[i], i));
         }
-        return <ul>{list}</ul>
+        return <ul key={`${Date.now()}${Math.floor(Math.random() * 1000)}`}>{list}</ul>
     }
 
     const createLi = (data, index) => {
@@ -27,7 +27,7 @@ const Question = (props) => {
                 list.push(createLink(data[i].link));
             }
         }
-        return <li key={index}>{list}</li>
+        return <li key={`${Date.now()}${Math.floor(Math.random() * 1000)}`}>{list}</li>
     }
 
     for (let i = 0; i < answer.length; i++) {

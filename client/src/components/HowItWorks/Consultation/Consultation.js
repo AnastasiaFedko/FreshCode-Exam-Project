@@ -15,7 +15,7 @@ const Consultation = (props) => {
                                 body={[{ text: 'For as low as $199, our naming contests and marketplace allow you to get an amazing brand quickly and affordably.'}]}
                                 classes={{
                                     roundSpan: styles.roundSpan
-                                }} />
+                                }}/>
 
                             <li></li>
                             <OptionConsult header='Satisfaction Guarantee'

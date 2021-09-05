@@ -11,16 +11,16 @@ const FAQ = (props) => {
                 <div className={styles.blockStartPoint} >
                     <nav className={styles.navContainer}>
                         <ul>
-                            <li>
+                            <li key='contests'>
                                 <a href="#contests">Launching A Contest</a>
                             </li>
-                            <li>
+                            <li key='marketplace'>
                                 <a href="#marketplace">Buying From Marketplace</a>
                             </li>
-                            <li>
+                            <li key='managed'>
                                 <a href="#managed">Managed Contests</a>
                             </li>
-                            <li>
+                            <li key='creatives'>
                                 <a href="#creatives">For Creatives</a>
                             </li>
                         </ul>
