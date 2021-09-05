@@ -15,6 +15,7 @@ const Home = (props) => {
   let timeout;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     timeout = setInterval(() => {
       setIndex(index + 1);
       setStyle(styles.headline__isloading);

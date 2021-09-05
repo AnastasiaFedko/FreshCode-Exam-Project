@@ -4,6 +4,7 @@ import { Field } from 'formik';
 
 const ImageUpload = ({ classes, name }) => {
   const [src, setSrc] = useState();
+  const [alt, setAlt] = useState('');
   return (
     <Field name={name}>
       {(props) => {
@@ -20,6 +21,7 @@ const ImageUpload = ({ classes, name }) => {
             const reader = new FileReader();
             reader.onload = () => {
               setSrc(reader.result);
+              setAlt(file.name);
             };
             reader.readAsDataURL(file);
           }
@@ -37,7 +39,8 @@ const ImageUpload = ({ classes, name }) => {
               />
               <label htmlFor="fileInput">Chose file</label>
             </div>
-            <img id="imagePreview" src={src} className={classNames({ [imgStyle]: !!field.value, [invisibleStyle]: !(!!field.value) })} />
+            <img id="imagePreview" src={src} className={classNames({ [imgStyle]: !!field.value, [invisibleStyle]: !(!!field.value) })}
+            alt={alt} />
           </div>
         );
       }}

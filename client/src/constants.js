@@ -1,7 +1,8 @@
 const env = process.env.NODE_ENV || 'development';
 const serverIP = 'localhost';
 const serverPort = 3000;
-export default {
+
+const CONSTANTS = {
   CONTACT_US: {
     PHONE: '(877)355-3585',
   },
@@ -90,3 +91,5 @@ export default {
     },
   ],
 };
+
+export default CONSTANTS
