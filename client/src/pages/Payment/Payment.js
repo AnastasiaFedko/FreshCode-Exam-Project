@@ -4,9 +4,8 @@ import isEmpty from 'lodash/isEmpty';
 import { payRequest, clearPaymentStore } from '../../actions/actionCreator';
 import PayForm from '../../components/PayForm/PayForm';
 import styles from './Payment.module.sass';
-import CONSTANTS from '../../constants';
 import Error from '../../components/Error/Error';
-import Logo from '../../components/Logo'
+import { Link } from 'react-router-dom';
 
 const Payment = (props) => {
   const pay = (values) => {
@@ -45,7 +44,7 @@ const Payment = (props) => {
   return (
     <div>
       <div className={styles.header}>
-        <Logo to='/'/>
+        <Link to='/'/>
       </div>
       <div className={styles.mainContainer}>
         <div className={styles.paymentContainer}>

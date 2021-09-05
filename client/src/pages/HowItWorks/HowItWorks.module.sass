@@ -1,0 +1,387 @@
+.mainContainer
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+    justify-content: center
+    font-family: "Poppins",Helvetica,Arial,sans-serif
+    font-size: 1rem
+    font-weight: 400
+    line-height: 1.5
+    color: #1e2022
+    text-align: left
+    background-color: #fff
+
+    .heroBanner
+        display: flex
+        justify-content: center
+
+    .notes
+        color: #377dff
+        border-radius: 6.1875rem
+        font-size: .6875rem
+        font-weight: 400
+        padding: .4375rem .9375rem
+        background: rgba(55,125,255,.1)
+        border: 1px solid transparent
+        margin-bottom: 0.5rem!important
+        display: inline-block
+        text-align: center
+        vertical-align: middle
+        user-select: none
+        line-height: 1.5
+
+    .blueButton
+        background-color: #377dff
+        border-color: #377dff
+        transition: all 0.2s ease-in-out
+        border-radius: 6.1875rem
+        min-width: 9.6875rem
+        color: #fff
+        display: inline-block
+        font-weight: 500
+        text-align: center
+        vertical-align: middle
+        margin-bottom: 0!important
+        border: 1px solid transparent
+        padding: .75rem 1rem
+        font-size: 1rem
+        line-height: 1.5
+        text-decoration: none
+
+        &:hover
+            box-shadow: 0 4px 11px rgb(55,125,255/35%)
+            transform: translateY(-3px)
+
+    %block
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+    .cardBlock
+        @extend %block
+
+    %space
+        margin: 0 150px
+        padding: 32px 16px
+        display: flex
+        flex-flow: row wrap
+        justify-content: space-between
+        width: 80%
+        max-width: 1270px
+        box-sizing: border-box
+
+    %column
+        position: relative
+        width: 100%
+        padding-right: 15px
+        padding-left: 15px
+
+    %row
+        display: flex
+        flex-wrap: wrap
+        margin-right: -15px
+        margin-left: -15px
+
+    .space1
+        @extend %space
+
+        @media (min-width: 769px) and (max-width: 1221px)
+            margin-left: 70px
+            margin-right: 70px
+
+        @media (max-width: 768px)
+            margin-left: 30px
+            margin-right: 30px
+            align-items: center
+            justify-content: center
+            width: 90%
+
+        .heroImgHolder
+            @media (min-width: 500px) and (max-width: 1221px)
+                display: none
+
+            img
+                width: 445px
+                height: 385px
+
+        .firstContainer
+            width: 50%
+
+            @media (min-width: 500px) and (max-width: 1221px)
+                width: 100%
+
+            h1
+                font-weight: 600!important
+                font-size: 2.5rem
+                margin-bottom: .5rem
+                line-height: 1.5
+
+            p
+                color: #77838f
+                line-height: 1.7
+                margin-bottom: 1rem
+
+        .space1Header
+            text-align: center!important
+            margin-bottom: 4rem!important
+            width: 100%
+
+            @media (max-width: 768px)
+                width: 100%
+
+            h2
+                font-size: 2rem
+                font-weight: 400!important
+                margin-bottom: .5rem
+                font-weight: 300
+                line-height: 1.5
+
+            p
+                margin-bottom: 0!important
+                color: #77838f
+                line-height: 1.7
+                margin: 0 0 10px
+
+        .cardBlockContainer
+            width: 100%
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+
+            @media (max-width: 992px)
+                width: 100%
+                flex-direction: column
+                align-items: center
+                justify-content: center
+
+            @media (max-width: 768px)
+                width: 100%
+
+    .space2
+        @extend %space
+        padding: 8rem 15px!important
+
+        @media (min-width: 769px) and (max-width: 1221px)
+            margin-left: 70px
+            margin-right: 70px
+            width: 90%
+
+        @media (max-width: 768px)
+            margin-left: 30px
+            margin-right: 30px
+            width: 90%
+
+        .space2Header
+            margin-bottom: 4rem!important
+            margin-right: auto
+            margin-left: auto
+            text-align: center
+
+            @media (max-width: 768px)
+                width: 100%
+
+            img
+                width: 72px
+                height: 72px
+
+            h2
+                font-size: 2rem
+                margin-bottom: .5rem
+                line-height: 1.5
+
+        .space2Body
+            @extend %block
+            @media (max-width: 992px)
+                flex-direction: column
+                align-items: center
+
+            .stepsImgHolder
+                order: 1
+                width: 100%
+
+                @media (max-width: 992px)
+                    order: 2
+
+            .stepsImgHolder > img
+                width: 402px
+                height: 460px
+
+                @media (max-width: 1199px)
+                    order: 2
+
+                @media (max-width: 992px)
+                    width: 100%
+                    height: auto
+
+            .stepsHolder
+                @extend %column
+                order: 2
+
+                @media (max-width: 992px)
+                    order: 1
+                    width: 90%
+                    margin-right: 2rem
+
+                @media (max-width: 768px)
+                    width: 100%
+
+                ul
+                    padding-left: 0
+                    list-style: none
+                    margin-bottom: 1rem
+
+                    li
+                        position: relative
+                        padding-left: 2.5rem
+                        padding-bottom: 1rem!important
+                        padding-top: 1rem!important
+
+                    li::after,
+                    li::before
+                        border: 0 solid #e5e7eb
+
+                    li::before
+                        position: absolute
+                        top: 0
+                        bottom: 0
+                        right: 0
+                        left: -.25rem
+                        width: 2rem
+                        height: .0625rem
+                        border-top: 1px solid #e7eaf3
+                        margin: auto auto auto 0
+                        content: ""
+
+                    li::after
+                        position: absolute
+                        top: 0
+                        bottom: 0
+                        right: 0
+                        left: -.3125rem
+                        width: .0625rem
+                        height: 100%
+                        border-right: 1px solid #e7eaf3
+                        margin: auto auto auto 0
+                        content: ""
+
+                    li:first-child::after
+                        height: 50%
+                        top: auto
+
+                    li:last-child::after
+                        height: 50%
+                        bottom: auto
+
+    hr
+        margin: 0
+        box-sizing: content-box
+        height: 0
+        overflow: visible
+        border: 0
+        border-top: 1px solid #e7eaf3
+        margin-bottom: 0!important
+        margin-top: 0!important
+
+    .infoContainer
+        @extend %row
+        box-sizing: border-box
+
+        @media (min-width: 992px)
+            justify-content: center!important
+
+        @media (max-width: 768px)
+            flex-direction: column
+            align-items: center!important
+            width: 100%
+
+.container
+    width: 100%
+    padding-right: 15px
+    padding-left: 15px
+    margin-right: auto
+    margin-left: auto
+    box-sizing: border-box
+
+    @media (min-width: 576px)
+        max-width: 540px
+
+    @media (min-width: 768px)
+        max-width: 720px
+
+    @media (min-width: 992px)
+        padding-bottom: 4rem!important
+        padding-top: 4rem!important
+        max-width: 960px
+
+    @media (min-width: 1200px)
+        max-width: 1140px
+
+.feauturedHolder
+    margin-bottom: 1.5rem!important
+    box-sizing: border-box
+    @extend %row
+    flex-wrap: nowrap
+
+    @media (min-width: 992px)
+        align-items: center!important
+
+    .feauturedHeader
+        @extend %column
+        box-sizing: border-box
+
+        @media (min-width: 769px)
+            flex: 0 0 33.33333%
+            max-width: 33.33333%
+        @media (max-width: 768px)
+            max-width: 100%
+            width: 100%
+
+        div
+            @media (min-width: 768px)
+                padding-left: 1.5rem!important
+
+            h6
+                padding-top: 2rem!important
+                font-size: 1.75rem
+                margin-bottom: .5rem
+                font-weight: 300
+                line-height: 1.5
+
+    .feauturedBody
+        @extend %column
+        box-sizing: border-box
+        margin-bottom: 2rem!important
+
+        @media (min-width: 768px)
+            margin-bottom: 0!important
+            flex: 0 0 66.66667%
+            max-width: 66.66667%
+
+        @media (max-width: 768px)
+            flex-direction: row
+            max-width: 100%
+            width: 100%
+
+    .sourseContainer
+        @extend %row
+        padding-top: 2rem!important
+        justify-content: space-around!important
+        border-top: 1px solid #e7eaf3!important
+        box-sizing: border-box
+
+        @media (max-width: 992px)
+            flex-direction: row
+
+        @media (max-width: 768px)
+            flex-direction: row
+            justify-content: space-between
+            max-width: 100%
+            width: 100%
+
+        div
+            @extend %column
+
+            @media (max-width: 992px)
+                flex-direction: row

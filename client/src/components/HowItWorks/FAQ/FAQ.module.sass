@@ -1,0 +1,107 @@
+
+.row
+    display: flex
+    flex-flow: row wrap
+    margin-right: -15px
+    margin-left: -15px
+
+    .blockStartPoint
+        margin-bottom: 3rem!important
+        position: relative
+        width: 100%
+        padding-right: 15px
+        padding-left: 15px
+        box-sizing: border-box
+
+        @media (min-width: 992px)
+            flex: 0 0 25%
+            max-width: 25%
+            margin-bottom: 0!important
+
+        .navContainer
+            max-width: 100%
+            border: 0!important
+            background-color: #377dff!important
+            position: sticky
+            top: 50px
+            display: flex
+            flex-direction: column
+            min-width: 0
+            word-wrap: break-word
+            background-color: #fff
+            background-clip: border-box
+            border: 1px solid #e7eaf3
+            border-radius: .3125rem
+
+            ul
+                list-style: none
+                padding: 1rem 2rem!important
+                display: flex
+                flex-direction: column
+                padding-left: 0
+                margin-bottom: 0
+
+                li
+                    list-style: none
+
+                a
+                    text-decoration: none
+                    border: none
+                    color: rgba(255,255,255,.7)
+                    padding-top: 1rem!important
+                    padding-bottom: 1rem!important
+                    padding-left: 0
+                    padding-right: 0
+                    background-color: transparent
+                    font-size: .875rem
+                    position: relative
+                    display: block
+                    width: 100%
+                    text-align: inherit
+
+                a:hover
+                    color: #fff
+
+                a:last-child
+                    border-bottom-right-radius: .3125rem
+                    border-bottom-left-radius: .3125rem
+                    margin-bottom: 0
+                    border-bottom: 0
+
+                a:first-child
+                    border-top-left-radius: .3125rem
+                    border-top-right-radius: .3125rem
+                    border-top: 0
+
+    .questionContainer
+        position: relative
+        width: 100%
+        padding-right: 15px
+        padding-left: 15px
+        box-sizing: border-box
+
+        @media (min-width: 992px)
+            flex: 0 0 75%
+            max-width: 75%
+
+        .questionsBlock
+            padding-bottom: 4rem!important
+
+            &:not(:first-child)
+                padding-top: 4rem!important
+
+            div
+                margin-bottom: 1rem
+
+                h3
+                    font-weight: 600!important
+                    color: #377dff!important
+                    font-size: 1.75rem
+                    margin-bottom: .5rem
+                    line-height: 1.5
+        
+        .questionsBlock:last-of-type
+            padding-bottom: 0!important
+
+        hr:last-child
+            display: none
