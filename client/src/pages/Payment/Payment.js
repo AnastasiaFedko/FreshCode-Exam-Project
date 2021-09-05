@@ -5,7 +5,7 @@ import { payRequest, clearPaymentStore } from '../../actions/actionCreator';
 import PayForm from '../../components/PayForm/PayForm';
 import styles from './Payment.module.sass';
 import Error from '../../components/Error/Error';
-import { Link } from 'react-router-dom';
+import Logo from '../../components/Logo';
 
 const Payment = (props) => {
   const pay = (values) => {
@@ -44,7 +44,7 @@ const Payment = (props) => {
   return (
     <div>
       <div className={styles.header}>
-        <Link to='/'/>
+        <Logo to='/'/>
       </div>
       <div className={styles.mainContainer}>
         <div className={styles.paymentContainer}>
