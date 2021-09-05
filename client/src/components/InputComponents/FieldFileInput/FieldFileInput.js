@@ -9,9 +9,7 @@ const FieldFileInput = ({ classes, ...rest }) => {
   return (
     <Field name={rest.name}>
       {(props) => {
-        const {
-          field, form
-        } = props;
+        const { form } = props;
 
         return (
           <div className={fileUploadContainer}>
