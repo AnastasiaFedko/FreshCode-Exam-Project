@@ -35,26 +35,12 @@ class Header extends React.Component {
             <span>{`Hi, ${this.props.data.displayName}`}</span>
             <img src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`} alt="menu" />
             <ul>
-              <li>
-                <Link
-                  to="/dashboard"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <span>View Dashboard</span>
-                </Link>
-              </li>
+              <li><Link to="/dashboard" style={{ textDecoration: 'none' }} ><span>View Dashboard</span></Link></li>
               <li><Link to="/account" style={{ textDecoration: 'none' }}><span>My Account</span></Link></li>
-              <li>
-                <Link
-                  to="http:/www.google.com"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <span>Messages</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="http:/www.google.com" style={{ textDecoration: 'none' }}><span>Affiliate Dashboard</span></Link>
-              </li>
+              {this.props.data?.role === CONSTANTS.CUSTOMER &&
+                <li><Link to="/events" style={{ textDecoration: 'none' }}><span>Events</span></Link></li>}
+              <li><Link to="http:/www.google.com" style={{ textDecoration: 'none' }}><span>Messages</span></Link></li>
+              <li><Link to="http:/www.google.com" style={{ textDecoration: 'none' }}><span>Affiliate Dashboard</span></Link></li>
               <li><span onClick={this.logOut}>Logout</span></li>
             </ul>
           </div>

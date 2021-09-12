@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './DomainButton.module.sass';
+import classNames from 'classnames';
 
 const DomainButton = (props) => {
 
     const { buttonText, body, updateValue, checkedValue, buttonValue } = props;
     console.log(props);
 
-    const [ classList, setClasslist ] = useState(styles.buttonContainer + ' ' + styles.activeButton)
+    const [ classList, setClasslist ] = useState( classNames(styles.buttonContainer, styles.activeButton))
 
     const onClickHandler = () => {
         if( checkedValue !== buttonValue){
@@ -16,7 +17,7 @@ const DomainButton = (props) => {
 
     useEffect(() => {
         setClasslist((checkedValue === buttonValue)
-        ? styles.buttonContainer + ' ' + styles.activeButton
+        ? classNames(styles.buttonContainer, styles.activeButton)
         : styles.buttonContainer) 
     }, [checkedValue, buttonValue])
 
