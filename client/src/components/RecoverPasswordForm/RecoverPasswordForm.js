@@ -1,33 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
-import { authActionLogin, clearAuth } from '../../actions/actionCreator';
-import styles from './LoginForm.module.sass';
+import { clearAuth, recoverPasswordAction } from '../../actions/actionCreator';
+import styles from './RecoverPasswordForm.module.sass';
 import FormInput from '../FormInput/FormInput';
 import Schems from '../../validators/validationSchems';
 import Error from '../Error/Error';
 
-class LoginForm extends React.Component {
-  
-  componentDidMount() {
-    const token = this.props.recowerToken;
-    if(token){
-      this.props.loginRequest({ data: {token}, history: this.props.history });
-    }
-  }
+class RecoverPasswordForm extends React.Component {
 
   componentWillUnmount() {
     this.props.authClear();
   }
 
   clicked = (values) => {
-    this.props.loginRequest({ data: values, history: this.props.history });
+    this.props.recoverPasswordRequest({ data: values, history: this.props.history });
   };
 
   render() {
-
-    const { authClear, submitting, auth: { error, isFetching } } = this.props;
+    const { authClear, recower: { error, isFetching, success } } = this.props;
 
     const formInputClasses = {
       container: styles.inputContainer,
@@ -38,7 +29,7 @@ class LoginForm extends React.Component {
     };
 
     return (
-      <div className={styles.loginForm}>
+      <div className={styles.recowerForm}>
         {error && (
           <Error
             data={error.data}
@@ -46,53 +37,60 @@ class LoginForm extends React.Component {
             clearError={authClear}
           />
         )}
-        <h2>LOGIN TO YOUR ACCOUNT</h2>
+        {success.result &&
+          (<div className={styles.successContainer}>
+            <span>{success.message}</span>
+            <i class="fas fa-check-circle"></i>
+          </div>
+          )}
+        <h2>RECOVER PASSWORD</h2>
         <Formik
           initialValues={{
             email: '',
             password: '',
           }}
           onSubmit={this.clicked}
-          validationSchema={Schems.LoginSchem}>
+          validationSchema={Schems.LoginSchem} >
           <Form>
             <FormInput
               classes={formInputClasses}
               name="email"
               type="text"
-              label="Email Address"/>
+              label="Email Address"
+              disabled={success.result}/>
             <FormInput
               classes={formInputClasses}
               name="password"
               type="password"
-              label="Password"/>
+              label="New Password"
+              disabled={success.result}/>
             <button
               type="submit"
-              disabled={submitting}
+              disabled={success.result}
               className={styles.submitContainer}>
               <span className={styles.inscription}>
                 {isFetching
                   ? 'Submitting...'
-                  : 'LOGIN'}
+                  : 'RECOVER PASSWORD'}
               </span>
             </button>
           </Form>
         </Formik>
-        <Link to="/recoverPassword" style={{ textDecoration: 'none' }}><span>Forgot password?</span></Link>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
-  return { auth };
+  const { recower } = state;
+  return { recower };
 };
 
 const mapDispatchToProps = (dispatch) => (
   {
-    loginRequest: ({ data, history }) => dispatch(authActionLogin(data, history)),
+    recoverPasswordRequest: ({ data, history }) => dispatch(recoverPasswordAction(data, history)),
     authClear: () => dispatch(clearAuth()),
   }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RecoverPasswordForm);

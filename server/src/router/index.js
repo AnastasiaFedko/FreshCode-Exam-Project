@@ -14,10 +14,16 @@ router.post(
   '/registration',
   validators.validateRegistrationData,
   hashPass,
-  userController.registration
+  userController.registration,
 );
 
 router.post('/login', validators.validateLogin, userController.login);
+router.post(
+  '/recoverPassword',
+  validators.validatePasswordRecover,
+  hashPass,
+  userController.recoverPassword,
+);
 
 router.post('/getUser', checkToken.checkAuth);
 
@@ -37,13 +43,13 @@ router.post(
   upload.uploadContestFiles,
   basicMiddlewares.parseBody,
   validators.validateContestCreation,
-  userController.payment
+  userController.payment,
 );
 
 router.post(
   '/cashout',
   basicMiddlewares.onlyForCreative,
-  userController.cashout
+  userController.cashout,
 );
 
 // customerRouter
@@ -58,19 +64,19 @@ router.post(
   '/setNewOffer',
   upload.uploadLogoFiles,
   basicMiddlewares.canSendOffer,
-  contestController.setNewOffer
+  contestController.setNewOffer,
 );
 
 router.post(
   '/setOfferStatus',
   basicMiddlewares.onlyForCustomerWhoCreateContest,
-  contestController.setOfferStatus
+  contestController.setOfferStatus,
 );
 
 router.post(
   '/changeMark',
   basicMiddlewares.onlyForCustomer,
-  userController.changeMark
+  userController.changeMark,
 );
 
 // chatRouter

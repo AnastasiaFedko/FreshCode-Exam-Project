@@ -28,4 +28,10 @@ module.exports = {
   NOTIFICATION_CHANGE_OFFER_STATUS: 'changeOfferStatus',
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
+  RECOVER_EMAIL: 'squad.help.exam@gmail.com',
+  RECOVER_PASSWORD: 'SquadHelpExam2021!',
+  RECOVER_HOST: 'smtp.gmail.com',
+  RECOVER_PORT: 465,
+  RECOVER_PATH: 'http://localhost:5000/login',
+
 };

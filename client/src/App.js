@@ -13,6 +13,7 @@ import Home from './pages/Home/Home';
 import OnlyNotAuthorizedUserHoc from './components/OnlyNotAuthorizedUserHoc/OnlyNotAuthorizedUserHoc';
 import ContestPage from './pages/ContestPage/ContestPage';
 import UserProfile from './pages/UserProfile/UserProfile';
+import RecoverPasswordPage from './pages/RecoverPasswordPage/RecoverPasswordPage';
 import 'react-toastify/dist/ReactToastify.css';
 import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import CONSTANTS from './constants';
@@ -37,6 +38,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={OnlyNotAuthorizedUserHoc(LoginPage)} />
+          <Route exact path="/recoverPassword" component={OnlyNotAuthorizedUserHoc(RecoverPasswordPage)} />
           <Route exact path="/registration" component={OnlyNotAuthorizedUserHoc(RegistrationPage)} />
           <Route exact path="/payment" component={PrivateHoc(Payment)} />
           <Route exact path="/startContest" component={PrivateHoc(StartContestPage)} />

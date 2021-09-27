@@ -13,9 +13,7 @@ module.exports.dataForContest = async (req, res, next) => {
       body: { characteristic1, characteristic2 },
     } = req;
     console.log(req.body, characteristic1, characteristic2);
-    const types = [characteristic1, characteristic2, 'industry'].filter(
-      Boolean
-    );
+    const types = [characteristic1, characteristic2, 'industry'].filter(Boolean);
 
     const characteristics = await db.Selects.findAll({
       where: {
@@ -142,15 +140,13 @@ module.exports.setNewOffer = async (req, res, next) => {
 const rejectOffer = async (offerId, creatorId, contestId) => {
   const rejectedOffer = await contestQueries.updateOffer(
     { status: CONSTANTS.OFFER_STATUS_REJECTED },
-    { id: offerId }
-  );
+    { id: offerId });
   controller
     .getNotificationController()
     .emitChangeOfferStatus(
       creatorId,
       'Someone of yours offers was rejected',
-      contestId
-    );
+      contestId);
   return rejectedOffer;
 };
 
@@ -160,29 +156,22 @@ const resolveOffer = async (
   orderId,
   offerId,
   priority,
-  transaction
+  transaction,
 ) => {
   const finishedContest = await contestQueries.updateContestStatus(
     {
       status: db.sequelize.literal(`   CASE
-            WHEN "id"=${contestId}  AND "orderId"='${orderId}' THEN '${
-        CONSTANTS.CONTEST_STATUS_FINISHED
-      }'
-            WHEN "orderId"='${orderId}' AND "priority"=${priority + 1}  THEN '${
-        CONSTANTS.CONTEST_STATUS_ACTIVE
-      }'
+            WHEN "id"=${contestId}  AND "orderId"='${orderId}' THEN '${CONSTANTS.CONTEST_STATUS_FINISHED}'
+            WHEN "orderId"='${orderId}' AND "priority"=${priority + 1}  THEN '${CONSTANTS.CONTEST_STATUS_ACTIVE}'
             ELSE '${CONSTANTS.CONTEST_STATUS_PENDING}'
-            END
-    `),
+            END    `),
     },
     { orderId },
-    transaction
-  );
+    transaction);
   await userQueries.updateUser(
     { balance: db.sequelize.literal('balance + ' + finishedContest.prize) },
     creatorId,
-    transaction
-  );
+    transaction);
   const updatedOffers = await contestQueries.updateOfferStatus(
     {
       status: db.sequelize.literal(` CASE
@@ -191,11 +180,8 @@ const resolveOffer = async (
             END
     `),
     },
-    {
-      contestId,
-    },
-    transaction
-  );
+    { contestId },
+    transaction);
   transaction.commit();
   const arrayRoomsId = [];
   updatedOffers.forEach((offer) => {
@@ -211,8 +197,7 @@ const resolveOffer = async (
     .emitChangeOfferStatus(
       arrayRoomsId,
       'Someone of yours offers was rejected',
-      contestId
-    );
+      contestId);
   controller
     .getNotificationController()
     .emitChangeOfferStatus(creatorId, 'Someone of your offers WIN', contestId);
@@ -226,8 +211,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
       const offer = await rejectOffer(
         req.body.offerId,
         req.body.creatorId,
-        req.body.contestId
-      );
+        req.body.contestId);
       res.send(offer);
     } catch (err) {
       next(err);
@@ -241,8 +225,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
         req.body.orderId,
         req.body.offerId,
         req.body.priority,
-        transaction
-      );
+        transaction);
       res.send(winningOffer);
     } catch (err) {
       transaction.rollback();
@@ -258,8 +241,8 @@ module.exports.getCustomersContests = (req, res, next) => {
     headers: { status },
   } = req;
   db.Contests.findAll({
-    where: { status: status, userId: userId },
-    limit: limit,
+    where: { status, userId },
+    limit,
     offset: offset ? offset : 0,
     order: [['id', 'DESC']],
     include: [
@@ -273,8 +256,7 @@ module.exports.getCustomersContests = (req, res, next) => {
     .then((contests) => {
       contests.forEach(
         (contest) =>
-          (contest.dataValues.count = contest.dataValues.Offers.length)
-      );
+          (contest.dataValues.count = contest.dataValues.Offers.length));
       let haveMore = true;
       if (contests.length === 0) {
         haveMore = false;
@@ -310,19 +292,18 @@ module.exports.getContests = (req, res, next) => {
     typeIndex,
     contestId,
     industry,
-    awardSort
-  );
+    awardSort);
 
   db.Contests.findAll({
     where: predicates.where,
     order: predicates.order,
-    limit: limit,
+    limit,
     offset: offset ? offset : 0,
     include: [
       {
         model: db.Offers,
         required: ownEntries,
-        where: ownEntries ? { userId: userId } : {},
+        where: ownEntries ? { userId } : {},
         attributes: ['id'],
       },
     ],
@@ -330,8 +311,7 @@ module.exports.getContests = (req, res, next) => {
     .then((contests) => {
       contests.forEach(
         (contest) =>
-          (contest.dataValues.count = contest.dataValues.Offers.length)
-      );
+          (contest.dataValues.count = contest.dataValues.Offers.length));
       let haveMore = true;
       if (contests.length === 0) {
         haveMore = false;

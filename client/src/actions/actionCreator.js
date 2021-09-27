@@ -6,6 +6,12 @@ export const authActionLogin = (data, history) => ({
   history,
 });
 
+export const recoverPasswordAction = (data, history) => ({
+  type: ACTION.RECOVER_PASSWORD_ACTION,
+  data,
+  history,
+});
+
 export const authActionRegister = (data, history) => ({
   type: ACTION.AUTH_ACTION_REGISTER,
   data,
