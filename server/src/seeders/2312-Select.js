@@ -144,4 +144,7 @@ module.exports = {
       },
     ], {});
   },
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete('Selects', null, {});
+  },
 };

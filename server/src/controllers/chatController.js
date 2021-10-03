@@ -9,13 +9,14 @@ const _ = require('lodash');
 
 module.exports.addMessage = async (req, res, next) => {
   const participants = [req.tokenData.userId, req.body.recipient];
+  const favoriteList = req.body.favoriteList;
   participants.sort(
     (participant1, participant2) => participant1 - participant2);
   try {
     const newConversation = await Conversation.findOneAndUpdate({
       participants,
     },
-    { participants, blackList: [false, false], favoriteList: [false, false] },
+    { participants, blackList: [false, false], favoriteList: favoriteList? favoriteList: [false, false] },
     {
       upsert: true,
       new: true,
