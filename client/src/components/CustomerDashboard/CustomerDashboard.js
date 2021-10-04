@@ -11,7 +11,7 @@ import TryAgain from '../TryAgain/TryAgain';
 class CustomerDashboard extends React.Component {
   loadMore = (startFrom) => {
     this.props.getContests({
-      limit: 40,
+      limit: 20,
       offset: startFrom,
       contestStatus: this.props.customerFilter,
     });
@@ -22,7 +22,7 @@ class CustomerDashboard extends React.Component {
   }
 
   getContests = () => {
-    this.props.getContests({ limit: 40, contestStatus: this.props.customerFilter });
+    this.props.getContests({ limit: 20, contestStatus: this.props.customerFilter});
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -36,6 +36,7 @@ class CustomerDashboard extends React.Component {
   };
 
   setContestList = () => {
+    console.log(this.props, 'CONTESTS!!!!!!!!!');
     const array = [];
     const { contests } = this.props;
     for (let i = 0; i < contests.length; i++) {
@@ -58,6 +59,7 @@ class CustomerDashboard extends React.Component {
   };
 
   render() {
+    console.log(this.props, 'PROPS!!!!!!!!');
     const { error, haveMore } = this.props;
     const { customerFilter } = this.props;
     return (
