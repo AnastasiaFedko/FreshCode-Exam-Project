@@ -8,7 +8,7 @@ const controller = require('../socketInit');
 const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
-const { sendEmail } = require('../utils/sendEmail');
+const sendEmail = require('../utils/sendEmail');
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -61,7 +61,7 @@ module.exports.recoverPassword = async (req, res, next) => {
       password: req.hashPass,
     }, CONSTANTS.JWT_SECRET, { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME });
     const fullName = `${foundUser.firstName} ${foundUser.lastName}`;
-    await sendEmail(token, req.body.email, fullName);
+    await sendEmail.forgotPasswordMail(token, req.body.email, fullName);
     res.send({ success: 'Link to change your password has been sent to your email' });
   } catch (err) {
     next(err);

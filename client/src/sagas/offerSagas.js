@@ -35,16 +35,36 @@ export function* addOfferSaga(action) {
 export function* setOfferStatusSaga(action) {
   try {
     const { data } = yield restController.setOfferStatus(action.data);
+    console.log(data, 'DATA!!!!!!!!!!');
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {
       if (data.status === CONSTANTS.OFFER_STATUS_WON) {
         offer.status = data.id === offer.id ? CONSTANTS.OFFER_STATUS_WON : CONSTANTS.OFFER_STATUS_REJECTED;
       } else if (data.id === offer.id) {
+        // if(offer.status === CONSTANTS.OFFER_STATUS_CONFIRMED){
         offer.status = CONSTANTS.OFFER_STATUS_REJECTED;
-      }
+      // }
+    }
     });
     yield put({ type: ACTION.CHANGE_STORE_FOR_STATUS, data: offers });
   } catch (e) {
     yield put({ type: ACTION.SET_OFFER_STATUS_ERROR, error: e.response });
+  }
+}
+export function* setOfferStatusByModeratorSaga(action) {
+  try {
+    const { data } = yield restController.setOfferStatus(action.data);
+    yield put({ type: ACTION.CHANGE_STORE_FOR_STATUS_BY_MODERATOR, data });
+  } catch (e) {
+    yield put({ type: ACTION.SET_OFFER_STATUS_ERROR, error: e.response });
+  }
+}
+export function* getOffersSaga() {
+  yield put({ type: ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST });
+  try {
+    const { data } = yield restController.getOffers();
+    yield put({ type: ACTION.GET_OFFERS_FOR_MODERATOR_SUCCESS, data });
+  } catch (e) {
+    yield put({ type: ACTION.GET_OFFERS_FOR_MODERATOR_ERROR, error: e.response });
   }
 }

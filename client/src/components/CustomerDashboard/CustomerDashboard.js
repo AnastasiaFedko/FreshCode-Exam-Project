@@ -36,7 +36,6 @@ class CustomerDashboard extends React.Component {
   };
 
   setContestList = () => {
-    console.log(this.props, 'CONTESTS!!!!!!!!!');
     const array = [];
     const { contests } = this.props;
     for (let i = 0; i < contests.length; i++) {
@@ -59,7 +58,6 @@ class CustomerDashboard extends React.Component {
   };
 
   render() {
-    console.log(this.props, 'PROPS!!!!!!!!');
     const { error, haveMore } = this.props;
     const { customerFilter } = this.props;
     return (

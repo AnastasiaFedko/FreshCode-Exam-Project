@@ -70,6 +70,9 @@ export const getContestById = (data) => ({
   type: ACTION.GET_CONTEST_BY_ID_ACTION,
   data,
 });
+export const getOffers = () => ({
+  type: ACTION.GET_OFFERS_FOR_MODERATOR_ACTION,
+});
 
 export const selectBundle = (bundle) => ({
   type: ACTION.SELECT_BUNDLE_ACTION,
@@ -105,6 +108,11 @@ export const setOfferStatus = (data) => ({
   data,
 });
 
+export const setOfferStatusByModerator = (data) => ({
+  type: ACTION.SET_OFFER_STATUS_BY_MODERATOR_ACTION,
+  data,
+});
+
 export const createCatalog = (data) => ({
   type: ACTION.CREATE_CATALOG_REQUEST,
   data,
@@ -122,6 +130,10 @@ export const cashOut = (data) => ({
 
 export const clearContestList = () => ({
   type: ACTION.CLEAR_CONTESTS_LIST,
+});
+
+export const clearOffersList = () => ({
+  type: ACTION.CLEAR_OFFERS_LIST,
 });
 
 export const onlyForNotAuthorize = (data) => ({
@@ -270,6 +282,11 @@ export const changeFocusOnCard = (data) => ({
 
 export const changeProfileModeView = (data) => ({
   type: ACTION.CHANGE_PROFILE_MODE_VIEW,
+  data,
+});
+
+export const changeOffersModeView = (data) => ({
+  type: ACTION.CHANGE_OFFERS_MODE_VIEW,
   data,
 });
 

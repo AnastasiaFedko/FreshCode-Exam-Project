@@ -5,12 +5,6 @@ const upload = require('../utils/fileUpload');
 const contestRouter = Router();
 
 contestRouter.get(
-  '/creativesContests',
-  basicMiddlewares.onlyForCreative,
-  contestController.getContests
-);
-
-contestRouter.get(
   '/',
   basicMiddlewares.onlyForCreative,
   contestController.getContests,

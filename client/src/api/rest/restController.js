@@ -8,6 +8,8 @@ export const getUser = () => http.post('getUser');
 export const updateContest = (data) =>
   http.put(`/contests/${data.contestId}`, data);
 
+export const getOffers = () => http.get('getOffers');
+
 export const getCustomersContests = ({ 
   offset, 
   limit, 

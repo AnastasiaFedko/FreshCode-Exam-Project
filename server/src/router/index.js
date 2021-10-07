@@ -52,8 +52,13 @@ router.post(
   userController.cashout,
 );
 
+router.get('/getOffers',
+  basicMiddlewares.onlyForModerator,
+  contestController.getOffers);
+
 // customerRouter
 router.get('/customersContests', contestController.getCustomersContests);
+// router.get('/moderatorsOffers', contestController.getCustomersContests);
 
 // userRouter
 router.post('/updateUser', upload.uploadAvatar, userController.updateUser);

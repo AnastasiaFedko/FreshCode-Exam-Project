@@ -39,16 +39,31 @@ class ContestPage extends React.Component {
   };
 
   setOffersList = () => {
+    const {role} = this.props.userStore.data;
     const array = [];
     for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
-      array.push(<OfferBox
-        data={this.props.contestByIdStore.offers[i]}
-        key={this.props.contestByIdStore.offers[i].id}
-        needButtons={this.needButtons}
-        setOfferStatus={this.setOfferStatus}
-        contestType={this.props.contestByIdStore.contestData.contestType}
-        date={new Date()}
-      />);
+      // if (role === CONSTANTS.CUSTOMER) {
+      //   if (this.props.contestByIdStore.offers[i].status === CONSTANTS.OFFER_STATUS_CONFIRMED) {
+      //     array.push(<OfferBox
+      //       data={this.props.contestByIdStore.offers[i]}
+      //       key={this.props.contestByIdStore.offers[i].id}
+      //       needButtons={this.needButtons}
+      //       setOfferStatus={this.setOfferStatus}
+      //       contestType={this.props.contestByIdStore.contestData.contestType}
+      //       date={new Date()}
+      //     />);
+      //   }
+      // }
+      // else {
+        array.push(<OfferBox
+          data={this.props.contestByIdStore.offers[i]}
+          key={this.props.contestByIdStore.offers[i].id}
+          needButtons={this.needButtons}
+          setOfferStatus={this.setOfferStatus}
+          contestType={this.props.contestByIdStore.contestData.contestType}
+          date={new Date()}
+        />);
+      // }
     }
     return array.length !== 0 ? array : <div className={styles.notFound}>There is no suggestion at this moment</div>;
   };

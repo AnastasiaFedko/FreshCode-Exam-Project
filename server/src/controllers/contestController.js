@@ -5,6 +5,7 @@ const userQueries = require('./queries/userQueries');
 const controller = require('../socketInit');
 const UtilFunctions = require('../utils/functions');
 const CONSTANTS = require('../constants');
+const sendEmail = require('../utils/sendEmail');
 
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
@@ -150,6 +151,22 @@ const rejectOffer = async (offerId, creatorId, contestId) => {
   return rejectedOffer;
 };
 
+const moderatorChangedOfferStatus = async (
+  offerId,
+  firstName,
+  lastName,
+  email,
+  text,
+  originalFileName,
+  command) => {
+  const rejectedOffer = await contestQueries.updateOffer(
+    { status: CONSTANTS.OFFER_STATUS_DECLINED },
+    { id: offerId });
+  const fullName = `${firstName} ${lastName}`;
+  await sendEmail.changeOfferStatusMail(email, fullName, text, originalFileName, command + 'd');
+  return rejectedOffer;
+};
+
 const resolveOffer = async (
   contestId,
   creatorId,
@@ -229,6 +246,21 @@ module.exports.setOfferStatus = async (req, res, next) => {
       res.send(winningOffer);
     } catch (err) {
       transaction.rollback();
+      next(err);
+    }
+  } else if (req.command === 'decline' || req.command === 'confirme') {
+    try {
+      const offer = await moderatorChangedOfferStatus(
+        req.body.offerId,
+        req.body.firstName,
+        req.body.lastName,
+        req.body.email,
+        req.body.text,
+        req.body.originalFileName,
+        req.command,
+      );
+      res.send(offer);
+    } catch (err) {
       next(err);
     }
   }
@@ -326,4 +358,40 @@ module.exports.getContests = (req, res, next) => {
     .catch((err) => {
       next(new ServerError());
     });
+};
+
+module.exports.getOffers = (req, res, next) => {
+  const resOffers = [];
+
+  db.Offers.findAll().then((offers) => {
+    offers.forEach((offer) => {
+      const contest = db.Contests.findByPk(offer.constestId);
+      const creator = db.Users.findByPk(offer.userId);
+      resOffers.push({
+        id: offer.id,
+        status: offer.status,
+        text: offer.text,
+        fileName: offer.fileName,
+        originalFileName: offer.originalFileName,
+        contestData: {
+          id: contest.id,
+          orderId: contest.orderId,
+          priority: contest.priority,
+          contestType: contest.contestType,
+        },
+        creatorData: {
+          id: creator.id,
+          avatar: creator.avatar,
+          firstName: creator.firstName,
+          lastName: creator.lastName,
+          email: creator.email,
+          rating: creator.rating,
+        },
+      });
+
+    });
+    res.send({ resOffers });
+  }).catch((err) => {
+    next(new ServerError());
+  });
 };

@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
             </button>
           </Form>
         </Formik>
-        <Link to="/recoverPassword" style={{ textDecoration: 'none' }}><span>Forgot password?</span></Link>
+        <Link to="/recoverPassword" className={styles.forgot}><span>Forgot password?</span></Link>
       </div>
     );
   }
