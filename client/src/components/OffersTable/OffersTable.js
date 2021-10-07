@@ -29,7 +29,7 @@ const OffersTable = (props) => {
               readonly />
           }</td>
           <td>{offers[i].contestData.contestType}</td>
-          <td>{offers[i].contestData.contestType == CONSTANTS.LOGO_CONTEST ?
+          <td>{offers[i].contestData.contestType === CONSTANTS.LOGO_CONTEST ?
             <img src={`${CONSTANTS.publicURL}${offers[i].fileName}`} alt="logo" />
             : offers[i].text}</td>
           <td>{offers[i].status}</td>

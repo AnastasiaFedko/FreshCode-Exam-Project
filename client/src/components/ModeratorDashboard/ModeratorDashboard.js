@@ -7,6 +7,7 @@ import styles from './ModeratorDashboard.module.sass';
 import ModeratorsOfferBox from '../ModeratorsOfferBox/ModeratorsOfferBox';
 import OffersTable from '../OffersTable/OffersTable';
 import TryAgain from '../TryAgain/TryAgain';
+import Spinner from '../Spinner/Spinner';
 
 class ModeratorDashboard extends React.Component {
 
@@ -16,11 +17,7 @@ class ModeratorDashboard extends React.Component {
         }
         this.props.getOffers();
     }
-
-    componentDidMount() {
-        this.props.getOffers();
-    }
-
+    
     tryToGetContest = () => {
         this.props.clearOffersList();
         this.props.getOffers();
