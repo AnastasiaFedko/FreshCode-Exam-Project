@@ -1,14 +1,15 @@
 .offerContainer
   display: flex
-  margin-top: 15px
   align-self: stretch
-  padding: 30px 40px 10px 40px
+  padding: 20px
   background-color: #f9fafb
   flex-direction: column
   justify-content: flex-start
   border-radius: 10px
   position: relative
   align-items: flex-start
+  width: 95%
+  margin: 10px auto
   @media(max-width: 450px)
     padding: 10px 0
 
@@ -19,7 +20,7 @@
     font-size: 54px
 
   .confirme
-    color: yellow
+    color: #f3ce54
 
   .decline
     color: navy
@@ -90,12 +91,14 @@
         transition: font-size 0.2s
 
     .responseConainer
-      width: 70%
+      width: 50%
+      height: inherit
       align-self: center
       display: flex
       flex-direction: column
       justify-content: flex-start
       align-items: center
+      margin: 5px 30px
       @media(max-width: 800px)
         margin-top: 10px
         max-width: 200px
@@ -128,27 +131,25 @@
       flex-direction: row
       align-items: center
       justify-content: flex-start
+      width: inherit
 
       .nameAndEmail
         display: flex
         flex-direction: column
+        flex-wrap: wrap
         align-items: flex-start
         justify-content: flex-start
+        box-sizing: border-box
+        width: inherit
+        overflow-wrap: break-word
 
         span
           color: #556da5
-          font-size: 16px
+          font-size: 14px
           font-weight: 500
-          margin-left: 10px
+          margin: 0 10px
 
       img
         width: 50px
         height: 50px
         border-radius: 25px
-
-
-.winner
-  background-color: #8aca6b
-
-.loser
-  background-color: #CD5C5C

@@ -1,6 +1,5 @@
-.offerContainer
+.tableContainer
   display: flex
-  margin-top: 15px
   align-self: stretch
   padding: 30px 40px 10px 40px
   background-color: #f9fafb
@@ -9,146 +8,42 @@
   border-radius: 10px
   position: relative
   align-items: flex-start
+  width: 85%
+  margin-bottom: 20px
+  @media(max-width: 1000px)
+      width: 100%
   @media(max-width: 450px)
     padding: 10px 0
 
-  i
-    position: absolute
-    left: calc(100% - 35px)
-    top: -15px
-    font-size: 54px
+  table, thead, tbody, th, td
+    border: 1px solid #c5c6c7
+    text-align: center
+    vertical-align: middle
+    box-sizing: border-box
+    padding: 7px
+    color: #556da5
 
-  .confirme
-    color: yellow
+  .img
+    width: 50px
+    height: 50px
+    border-radius: 25px
 
-  .decline
-    color: navy
+  .logo
+    width: auto
+    height: 100px
 
-  .btnsContainer
-    margin: 5px 0
-    align-self: stretch
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-between
+  .noWrapTableColumn
+    white-space: nowrap
+  
+  .wrapTableColumn
+    word-break: break-word
+    width: 150px
 
-    .confirmeBtn
-      width: 100px
-      cursor: pointer
-      text-align: center
-      padding: 10px
-      border-radius: 8px
-      background-color: #6b81ca
-      color: white
-
-      &:hover
-        background-color: #506cca
-
-    .declineBtn
-      text-align: center
-      cursor: pointer
-      width: 100px
-      padding: 10px
-      border-radius: 8px
-      background-color: #cbcd5c
-      color: white
-      margin: 0 25px
-
-      &:hover
-        background-color: #cbce3e
-
-  .mainInfoContainer
-    align-self: stretch
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-between
-    position: relative
-    @media(max-width: 500px)
-      flex-direction: column
-
-    .userInfo
-      min-width: 215px
-
-    i
-      cursor: pointer
-      position: absolute
-      align-self: flex-start
-      font-size: 26px
-      transition: font-size 0.2s
-      color: #4e618d
-      @media(max-width: 450px)
-        top: 30px
-      @media(max-width: 380px)
-        top: 100px
-        align-self: flex-end
-      @media(max-width: 500px)
-        align-self: flex-end
-
-      &:hover
-        font-size: 34px
-        transition: font-size 0.2s
-
-    .responseConainer
-      width: 70%
-      align-self: center
-      display: flex
-      flex-direction: column
-      justify-content: flex-start
-      align-items: center
-      @media(max-width: 800px)
-        margin-top: 10px
-        max-width: 200px
-
-      .responseLogo
-        width: auto
-        height: 100px
-
-      .response
-        text-align: center
-        overflow-wrap: break-word
-        align-self: stretch
-        margin-left: 10px
-        color: #556da5
-        margin-bottom: 10px
-        font-size: 18px
-
-    .creativeRating
-      display: flex
-      margin-top: 5px
-      align-items: center
-
-      .userScoreLabel
-        margin-right: 10px
-        color: #556da5
-        font-size: 15px
-
-    .creativeInfoContainer
-      display: flex
-      flex-direction: row
-      align-items: center
-      justify-content: flex-start
-
-      .nameAndEmail
-        display: flex
-        flex-direction: column
-        align-items: flex-start
-        justify-content: flex-start
-
-        span
-          color: #556da5
-          font-size: 16px
-          font-weight: 500
-          margin-left: 10px
-
-      img
-        width: 50px
-        height: 50px
-        border-radius: 25px
-
-
-.winner
-  background-color: #8aca6b
-
-.loser
-  background-color: #CD5C5C
+.notFound
+  font-size: 18px
+  text-align: center
+  padding: 10px
+  font-weight: 600
+  width: 100%
+  margin: 0 auto
+  color: #4e618d

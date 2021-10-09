@@ -4,21 +4,12 @@ import classNames from 'classnames';
 import { changeOffersModeView, clearOffersList, getOffers } from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
 import styles from './ModeratorDashboard.module.sass';
-import ModeratorsOfferBox from '../ModeratorsOfferBox/ModeratorsOfferBox';
 import OffersTable from '../OffersTable/OffersTable';
-import TryAgain from '../TryAgain/TryAgain';
-import Spinner from '../Spinner/Spinner';
+import ModeratorOffers from '../ModeratorOffers/ModeratorOffers';
 
 class ModeratorDashboard extends React.Component {
 
-    componentDidMount() {
-        if (this.props.userStore.data.role !== CONSTANTS.MODERATOR) {
-            this.props.history.replace('/');
-        }
-        this.props.getOffers();
-    }
-    
-    tryToGetContest = () => {
+    tryToGetOffers = () => {
         this.props.clearOffersList();
         this.props.getOffers();
     };
@@ -28,7 +19,8 @@ class ModeratorDashboard extends React.Component {
     }
 
     render() {
-        const { offersModeView, error, isFetching, getOffers } = this.props;
+        const { offersModeView, changeOffersModeView } = this.props;
+        this.props.getOffers();
         return (
             <div className={styles.mainContainer}>
                 <div className={styles.filterContainer}>
@@ -49,15 +41,11 @@ class ModeratorDashboard extends React.Component {
                         Offers Table
                     </div>
                 </div>
-                <div className={styles.contestsContainer}>
-                    {error ? <div className={styles.tryContainer}><TryAgain getData={getOffers()} /></div>
-                        : (isFetching
-                            ? (<div className={styles.containerSpinner}>
-                                <Spinner />
-                            </div>)
-                            : (offersModeView === CONSTANTS.OFFERS_INFO_MODE
-                                ? <ModeratorsOfferBox />
-                                : <OffersTable offers={getOffers()} />))
+                <div className={styles.offersContainer}>
+                    {
+                        offersModeView === CONSTANTS.OFFERS_INFO_MODE
+                            ? <ModeratorOffers />
+                            : <OffersTable />
                     }
                 </div>
             </div>);
@@ -65,8 +53,8 @@ class ModeratorDashboard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { offersModeView, isFetching, error } = state.offersStore;
-    return { offersModeView, isFetching, error };
+    const { offersModeView } = state.offersStore;
+    return { offersModeView };
 }
 
 const mapDispatchToProps = (dispatch) => ({

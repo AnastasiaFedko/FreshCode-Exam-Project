@@ -21,7 +21,7 @@ const ModeratorsOfferBox = (props) => {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => props.setOfferStatus( data, 'confirme'),
+          onClick: () => props.setOfferStatus( data, CONSTANTS.OFFER_STATUS_CONFIRMED),
         },
         {
           label: 'No',
@@ -37,7 +37,7 @@ const ModeratorsOfferBox = (props) => {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => props.setOfferStatus(data, 'decline'),
+          onClick: () => props.setOfferStatus(data, CONSTANTS.OFFER_STATUS_DECLINED),
         },
         {
           label: 'No',
@@ -50,7 +50,7 @@ const ModeratorsOfferBox = (props) => {
     if (data.status === CONSTANTS.OFFER_STATUS_CONFIRMED) {
       return <i className={classNames('fas fa-thumbs-up confirme', styles.confirme)} />;
     } if (data.status === CONSTANTS.OFFER_STATUS_DECLINED) {
-      return <i className={classNames('fas fa-thumbs-up decline', styles.decline)} />;
+      return <i className={classNames('fas fa-thumbs-down decline', styles.decline)} />;
     }
     return null;
   };

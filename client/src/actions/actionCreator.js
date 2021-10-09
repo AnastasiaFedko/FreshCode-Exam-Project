@@ -44,6 +44,10 @@ export const clearSetOfferStatusError = () => ({
   type: ACTION.CLEAR_SET_OFFER_STATUS_ERROR,
 });
 
+export const clearSetOfferStatusByModeratorError = () => ({
+  type: ACTION.SET_OFFER_STATUS_BY_MODERATOR_ERROR,
+});
+
 export const getUserAction = (data) => ({
   type: ACTION.GET_USER_ACTION,
   replace: data,

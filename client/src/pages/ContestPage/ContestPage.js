@@ -39,11 +39,13 @@ class ContestPage extends React.Component {
   };
 
   setOffersList = () => {
-    const {role} = this.props.userStore.data;
+    const { role } = this.props.userStore.data;
     const array = [];
     for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
       if (role === CONSTANTS.CUSTOMER) {
-        if (this.props.contestByIdStore.offers[i].status === CONSTANTS.OFFER_STATUS_CONFIRMED) {
+        if (this.props.contestByIdStore.offers[i].status === CONSTANTS.OFFER_STATUS_CONFIRMED ||
+          this.props.contestByIdStore.offers[i].status === CONSTANTS.OFFER_STATUS_WON ||
+          this.props.contestByIdStore.offers[i].status === CONSTANTS.OFFER_STATUS_REJECTED) {
           array.push(<OfferBox
             data={this.props.contestByIdStore.offers[i]}
             key={this.props.contestByIdStore.offers[i].id}
@@ -72,7 +74,7 @@ class ContestPage extends React.Component {
     const contestCreatorId = this.props.contestByIdStore.contestData.User.id;
     const userId = this.props.userStore.data.id;
     const contestStatus = this.props.contestByIdStore.contestData.status;
-    return (contestCreatorId === userId && contestStatus === CONSTANTS.CONTEST_STATUS_ACTIVE && offerStatus === CONSTANTS.OFFER_STATUS_PENDING);
+    return (contestCreatorId === userId && contestStatus === CONSTANTS.CONTEST_STATUS_ACTIVE && offerStatus === CONSTANTS.OFFER_STATUS_CONFIRMED);
   };
 
   setOfferStatus = (creatorId, offerId, command) => {
@@ -134,6 +136,19 @@ class ContestPage extends React.Component {
       offers,
       setOfferStatusError,
     } = contestByIdStore;
+
+    let entries = 0;
+    if (role === CONSTANTS.CUSTOMER) {
+      offers.forEach((offer) => {
+        if ([
+          CONSTANTS.OFFER_STATUS_WON, 
+          CONSTANTS.OFFER_STATUS_REJECTED, 
+          CONSTANTS.OFFER_STATUS_CONFIRMED].includes(offer.status)) {
+          entries++;
+        }
+      })
+    }
+
     return (
       <div>
         {/* <Chat/> */}
@@ -198,7 +213,7 @@ class ContestPage extends React.Component {
                   </div>
                   <ContestSideBar
                     contestData={contestData}
-                    totalEntries={offers.length}
+                    totalEntries={role === CONSTANTS.CUSTOMER ? entries : offers.length}
                   />
                 </div>
               )

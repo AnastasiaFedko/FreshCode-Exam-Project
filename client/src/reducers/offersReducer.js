@@ -3,18 +3,11 @@ import CONSTANTS from '../constants';
 
 const initialState = {
     offersModeView: CONSTANTS.OFFERS_INFO_MODE,
-    offers: [], //{
-    //id, 
-    //status, 
-    //text, 
-    //fileName
-    //originalFileName,
-    //contestData: {id, orderId, priority, contestType}
-    //creatorData: {id, avatar, firstName, lastName, email, rating }
-    //}
+    offers: [], 
     error: null,
     isFetching: true,
-
+    setOfferStatusError: null,
+    countPending: 0,
 };
 
 function offersReducer(state = initialState, action) {
@@ -25,13 +18,23 @@ function offersReducer(state = initialState, action) {
                 offersModeView: action.data,
             };
         }
-        case ACTION.CHANGE_STORE_FOR_STATUS_BY_MODERATOR: {
-            const newOffers = JSON.parse(JSON.stringify(state.offers));
-            const index = newOffers.findIndex((offer) => offer.id === action.data.id);
-            newOffers[index].status = action.data.status;
+        case ACTION.CLEAR_SET_OFFER_STATUS_BY_MODERATOR_ERROR: {
+          return {
+            ...state,
+            setOfferStatusError: null,
+          };
+        }
+        case ACTION.SET_OFFER_STATUS_BY_MODERATOR_SUCCESS: {
             return {
                 ...state,
-                offers: newOffers,
+                offers: action.data,
+                countPending: action.count,
+            }
+        }
+        case ACTION.SET_OFFER_STATUS_BY_MODERATOR_ERROR: {
+            return {
+                ...state,
+                setOfferStatusError: action.error,
             }
         }
         case ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST: {
@@ -47,7 +50,7 @@ function offersReducer(state = initialState, action) {
               ...state,
               isFetching: false,
               error: null,
-              offers: action.data.offers,
+              offers: action.data,
             };
           }
           case ACTION.GET_OFFERS_FOR_MODERATOR_ERROR: {

@@ -159,12 +159,12 @@ const moderatorChangedOfferStatus = async (
   text,
   originalFileName,
   command) => {
-  const rejectedOffer = await contestQueries.updateOffer(
-    { status: CONSTANTS.OFFER_STATUS_DECLINED },
+  const offer = await contestQueries.updateOffer(
+    { status: command },
     { id: offerId });
   const fullName = `${firstName} ${lastName}`;
-  await sendEmail.changeOfferStatusMail(email, fullName, text, originalFileName, command + 'd');
-  return rejectedOffer;
+  await sendEmail.changeOfferStatusMail(email, fullName, text, originalFileName, command);
+  return offer;
 };
 
 const resolveOffer = async (
@@ -192,8 +192,11 @@ const resolveOffer = async (
   const updatedOffers = await contestQueries.updateOfferStatus(
     {
       status: db.sequelize.literal(` CASE
-            WHEN "id"=${offerId} THEN '${CONSTANTS.OFFER_STATUS_WON}'
-            ELSE '${CONSTANTS.OFFER_STATUS_REJECTED}'
+            WHEN "id"=${offerId} THEN '${CONSTANTS.OFFER_STATUS_WON}'::"enum_Offers_status"
+            WHEN "status"='${CONSTANTS.OFFER_STATUS_CONFIRMED}' THEN '${CONSTANTS.OFFER_STATUS_REJECTED}'::"enum_Offers_status"
+            WHEN "status"='${CONSTANTS.OFFER_STATUS_DECLINED}' THEN '${CONSTANTS.OFFER_STATUS_DECLINED}'::"enum_Offers_status"
+            WHEN "status"='${CONSTANTS.OFFER_STATUS_PENDING}' THEN '${CONSTANTS.OFFER_STATUS_DECLINED}'::"enum_Offers_status"
+            WHEN "status"='${CONSTANTS.OFFER_STATUS_REJECTED}' THEN '${CONSTANTS.OFFER_STATUS_REJECTED}'::"enum_Offers_status"
             END
     `),
     },
@@ -248,7 +251,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
       transaction.rollback();
       next(err);
     }
-  } else if (req.command === 'decline' || req.command === 'confirme') {
+  } else if (req.body.command === CONSTANTS.OFFER_STATUS_DECLINED || req.body.command === CONSTANTS.OFFER_STATUS_CONFIRMED) {
     try {
       const offer = await moderatorChangedOfferStatus(
         req.body.offerId,
@@ -257,7 +260,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
         req.body.email,
         req.body.text,
         req.body.originalFileName,
-        req.command,
+        req.body.command,
       );
       res.send(offer);
     } catch (err) {
@@ -286,14 +289,22 @@ module.exports.getCustomersContests = (req, res, next) => {
       {
         model: db.Offers,
         required: false,
-        attributes: ['id'],
+        attributes: ['id', 'status'],
       },
     ],
   })
     .then((contests) => {
       contests.forEach(
-        (contest) =>
-          (contest.dataValues.count = contest.dataValues.Offers.length));
+        (contest) => {
+          let count = 0;
+          for (const offer of contest.dataValues.Offers) {
+            if([CONSTANTS.OFFER_STATUS_CONFIRMED, CONSTANTS.OFFER_STATUS_WON, CONSTANTS.OFFER_STATUS_REJECTED].includes(offer.status)){
+              count++;
+            }
+          }
+          (contest.dataValues.count = count);
+        },
+      );
       let haveMore = true;
       if (contests.length === 0) {
         haveMore = false;
@@ -360,38 +371,60 @@ module.exports.getContests = (req, res, next) => {
     });
 };
 
-module.exports.getOffers = (req, res, next) => {
-  const resOffers = [];
-
-  db.Offers.findAll().then((offers) => {
-    offers.forEach((offer) => {
-      const contest = db.Contests.findByPk(offer.constestId);
-      const creator = db.Users.findByPk(offer.userId);
-      resOffers.push({
-        id: offer.id,
-        status: offer.status,
-        text: offer.text,
-        fileName: offer.fileName,
-        originalFileName: offer.originalFileName,
-        contestData: {
-          id: contest.id,
-          orderId: contest.orderId,
-          priority: contest.priority,
-          contestType: contest.contestType,
+module.exports.getOffers = async (req, res, next) => {
+  try {
+    const offersInfo = await db.Offers.findAll({
+      order: [['id', 'desc']],
+      attributes: {
+        exclude: ['contestId', 'userId'],
+      },
+      include: [
+        {
+          model: db.Users,
+          required: true,
+          attributes: {
+            exclude: ['displayName', 'password', 'role', 'balance', 'accessToken'],
+          },
         },
-        creatorData: {
-          id: creator.id,
-          avatar: creator.avatar,
-          firstName: creator.firstName,
-          lastName: creator.lastName,
-          email: creator.email,
-          rating: creator.rating,
+        {
+          model: db.Contests,
+          required: true,
+          attributes: { include: ['id', 'orderId', 'priority', 'contestType'] },
         },
-      });
+      ],
+    });
 
+    const resOffers = [];
+
+    offersInfo.forEach((offer) => {
+      resOffers.push(offer.get({ plain: true }));
+    });
+
+    resOffers.forEach((offer) => {
+      if (offer.User) {
+        offer.creatorData = {
+          id: offer.User.id,
+          firstName: offer.User.firstName,
+          lastName: offer.User.lastName,
+          email: offer.User.email,
+          avatar: offer.User.avatar,
+          rating: offer.User.rating,
+        };
+      }
+      delete offer.User;
+      if (offer.Contest) {
+        offer.contestData = {
+          id: offer.Contest.id,
+          orderId: offer.Contest.orderId,
+          priority: offer.Contest.priority,
+          contestType: offer.Contest.contestType,
+        };
+      }
+      delete offer.Contest;
     });
     res.send({ resOffers });
-  }).catch((err) => {
-    next(new ServerError());
-  });
+
+  } catch (e) {
+    next(new ServerError(e.message));
+  }
 };

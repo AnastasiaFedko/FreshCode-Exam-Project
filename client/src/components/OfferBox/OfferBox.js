@@ -77,12 +77,20 @@ const OfferBox = (props) => {
   };
 
   const offerStatus = () => {
-    const { status } = props.data;
+    const { data: {status}, role } = props;
     if (status === CONSTANTS.OFFER_STATUS_REJECTED) {
       return <i className={classNames('fas fa-times-circle reject', styles.reject)} />;
     } if (status === CONSTANTS.OFFER_STATUS_WON) {
       return <i className={classNames('fas fa-check-circle resolve', styles.resolve)} />;
     }
+    if(role === CONSTANTS.CREATOR){
+      if (status === CONSTANTS.OFFER_STATUS_CONFIRMED) {
+        return <i className={classNames('fas fa-thumbs-up confirme', styles.confirme)} />;
+      } if (status === CONSTANTS.OFFER_STATUS_DECLINED) {
+        return <i className={classNames('fas fa-thumbs-down decline', styles.decline)} />;
+      }
+    }
+
     return null;
   };
 
