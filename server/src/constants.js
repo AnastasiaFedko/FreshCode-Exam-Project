@@ -8,6 +8,7 @@ module.exports = {
   SQUADHELP_BANK_EXPIRY: '11/22',
   CUSTOMER: 'customer',
   CREATOR: 'creator',
+  MODERATOR: 'moderator',
   CREATOR_ENTRIES: 'creator_entries',
   CONTEST_STATUS_ACTIVE: 'active',
   CONTEST_STATUS_FINISHED: 'finished',
@@ -19,6 +20,8 @@ module.exports = {
   OFFER_STATUS_PENDING: 'pending',
   OFFER_STATUS_REJECTED: 'rejected',
   OFFER_STATUS_WON: 'won',
+  OFFER_STATUS_CONFIRMED: 'confirmed',
+  OFFER_STATUS_DECLINED: 'declined',
   FILES_PATH: 'public/',
   SOCKET_CONNECTION: 'connection',
   SOCKET_SUBSCRIBE: 'subscribe',
@@ -29,5 +32,10 @@ module.exports = {
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
   DAILY_LOGGER_HOURS: '1',
-  DAILY_LOGGER_MINUTES: '0'
+  DAILY_LOGGER_MINUTES: '0',
+  EMAIL: 'squad.help.exam@gmail.com',
+  EMAIL_PASSWORD: 'SquadHelpExam2021!',
+  EMAIL_HOST: 'smtp.gmail.com',
+  EMAIL_PORT: 465,
+  EMAIL_PATH: 'http://localhost:5000/login',
 };

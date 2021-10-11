@@ -47,7 +47,7 @@ const Home = (props) => {
               </p>
               <div className={styles.button}>
                 <Link className={styles.button__link}
-                  to={(data?.role !== CONSTANTS.CUSTOMER && data?.role !== CONSTANTS.CREATOR) ? "/login" : "/dashboard"}>DASHBOARD</Link>
+                  to={(data?.role !== CONSTANTS.CUSTOMER && data?.role !== CONSTANTS.CREATOR && data?.role !== CONSTANTS.MODERATOR) ? "/login" : "/dashboard"}>DASHBOARD</Link>
               </div>
             </div>
             <div className={styles.greyContainer}>
@@ -207,7 +207,7 @@ const Home = (props) => {
             />
             <div className={styles.button}>
               <Link className={styles.button__link}
-                to={(data?.role !== CONSTANTS.CUSTOMER && data?.role !== CONSTANTS.CREATOR) ? "/login" : "/dashboard"}>DASHBOARD</Link>
+                to={(data?.role !== CONSTANTS.CUSTOMER && data?.role !== CONSTANTS.CREATOR && data?.role !== CONSTANTS.MODERATOR) ? "/login" : "/dashboard"}>DASHBOARD</Link>
             </div>
             <div className={styles.blueContainer}>
               <h2 className={styles.whiteUnderline}>What our customers say</h2>

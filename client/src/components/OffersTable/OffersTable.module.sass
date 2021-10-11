@@ -1,0 +1,49 @@
+.tableContainer
+  display: flex
+  align-self: stretch
+  padding: 30px 40px 10px 40px
+  background-color: #f9fafb
+  flex-direction: column
+  justify-content: flex-start
+  border-radius: 10px
+  position: relative
+  align-items: flex-start
+  width: 85%
+  margin-bottom: 20px
+  @media(max-width: 1000px)
+      width: 100%
+  @media(max-width: 450px)
+    padding: 10px 0
+
+  table, thead, tbody, th, td
+    border: 1px solid #c5c6c7
+    text-align: center
+    vertical-align: middle
+    box-sizing: border-box
+    padding: 7px
+    color: #556da5
+
+  .img
+    width: 50px
+    height: 50px
+    border-radius: 25px
+
+  .logo
+    width: auto
+    height: 100px
+
+  .noWrapTableColumn
+    white-space: nowrap
+  
+  .wrapTableColumn
+    word-break: break-word
+    width: 150px
+
+.notFound
+  font-size: 18px
+  text-align: center
+  padding: 10px
+  font-weight: 600
+  width: 100%
+  margin: 0 auto
+  color: #4e618d

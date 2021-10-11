@@ -23,3 +23,13 @@ export function* registerSaga(action) {
     yield put({ type: ACTION.AUTH_ACTION_ERROR, error: e.response });
   }
 }
+
+export function* recoverPasswordSaga(action) {
+  yield put({ type: ACTION.RECOVER_PASSWORD_ACTION_REQUEST });
+  try {
+    const { data } = yield restController.recoverPasswordRequest(action.data);
+    yield put({ type: ACTION.RECOVER_PASSWORD_ACTION_SUCCESS, data: { success: data.success }});
+  } catch (err) {
+    yield put({ type: ACTION.RECOVER_PASSWORD_ACTION_ERROR, error: err.response });
+  }
+}

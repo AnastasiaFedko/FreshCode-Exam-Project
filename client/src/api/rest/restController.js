@@ -2,15 +2,22 @@ import http from '../interceptor';
 
 export const registerRequest = (data) => http.post('registration', data);
 export const loginRequest = (data) => http.post('login', data);
+export const recoverPasswordRequest = (data) => http.post('recoverPassword', data);
 export const getUser = () => http.post('getUser');
 
 export const updateContest = (data) =>
   http.put(`/contests/${data.contestId}`, data);
 
-export const getCustomersContests = (data) =>
-  http.get(`customersContests?limit=${data.limit}&offset: ${data.offset},`, {
+export const getOffers = () => http.get('getOffers');
+
+export const getCustomersContests = ({ 
+  offset, 
+  limit, 
+  contestStatus 
+}) =>
+  http.get(`customersContests?limit=${limit}&offset=${offset}`, {
     headers: {
-      status: data.contestStatus,
+      status: contestStatus,
     },
   });
 

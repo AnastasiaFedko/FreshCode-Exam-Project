@@ -30,22 +30,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('won', 'rejected', 'confirmed', 'declined', 'pending'),
       allowNull: true,
       defaultValue: 'pending',
     },
   },
   {
     timestamps: false,
-  });
+  },
+  );
 
   Offer.associate = function (models) {
-    Offer.belongsTo(models.User, { foreignKey: 'user_id', sourceKey: 'id' });
-  };
-
-  Offer.associate = function (models) {
-    Offer.belongsTo(models.Contest,
-      { foreignKey: 'contest_id', sourceKey: 'id' });
+    Offer.belongsTo(models.Users, { foreignKey: 'userId', sourceKey: 'id' });
+    Offer.belongsTo(models.Contests, { foreignKey: 'contestId', sourceKey: 'id' });
+    Offer.hasOne(models.Ratings, { foreignKey: 'offerId', targetKey: 'id' });
   };
 
   return Offer;

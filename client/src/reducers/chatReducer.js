@@ -211,7 +211,7 @@ function chatReducer (state = initialState, action) {
       return {
         ...state,
         currentCatalog: action.data.currentCatalog,
-        catalogList: [...action.data.catalogList],
+        catalogList: action.data.catalogList,
       };
     }
     case ACTION.CHANGE_RENAME_CATALOG_MODE: {

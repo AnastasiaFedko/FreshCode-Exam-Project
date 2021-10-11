@@ -5,8 +5,8 @@ const ColumnInfo = (props) => {
     const { column, formattedArticle } = props;
 
     const articles = [];
-    column.forEach((art) => {
-        articles.push(<ArticleInfo header={art.header} body={art.body} />)
+    column.forEach((art, index) => {
+        articles.push(<ArticleInfo key={index} header={art.header} body={art.body} />)
     });
 
     return (

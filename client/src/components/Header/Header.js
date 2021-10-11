@@ -117,7 +117,9 @@ class Header extends React.Component {
                     <li><Link to='/howitworks'> HOW IT WORKS </Link></li>
                     <li><a href="http://www.google.com">PRICING</a></li>
                     <li><a href="http://www.google.com">AGENCY SERVICE</a></li>
-                    {this.props.data?.role !== CONSTANTS.CUSTOMER && this.props.data?.role !== CONSTANTS.CREATOR &&
+                    {this.props.data?.role !== CONSTANTS.CUSTOMER 
+                    && this.props.data?.role !== CONSTANTS.CREATOR 
+                    && this.props.data?.role !== CONSTANTS.MODERATOR &&
                       <li>
                         <Link to='/registration'> BECOME A CREATIVE </Link>
                       </li>}

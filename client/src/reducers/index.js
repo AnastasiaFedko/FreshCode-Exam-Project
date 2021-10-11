@@ -10,10 +10,13 @@ import getContestByIdReducer from './getContestByIdReducer';
 import updateContestReducer from './updateContestReducer';
 import chatReducer from './chatReducer';
 import userProfileReducer from './userProfileReducer';
+import recowerReducer from './recowerReducer';
+import offersReducer from './offersReducer';
 
 const appReducer = combineReducers({
   userStore: getUserReducer,
   auth: authReducer,
+  recower: recowerReducer,
   dataForContest: dataForContestReducer,
   payment: payReducer,
   contestByIdStore: getContestByIdReducer,
@@ -23,6 +26,7 @@ const appReducer = combineReducers({
   updateContestStore: updateContestReducer,
   chatStore: chatReducer,
   userProfile: userProfileReducer,
+  offersStore: offersReducer,
 });
 
 export default appReducer;

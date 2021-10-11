@@ -25,18 +25,10 @@ services:
       - "3000:3000"
     depends_on:
       - db-dev
-      - mongo-dev
     volumes:
       - ./var/www/html/images:/var/www/html/images
       - ./server:/server
       - /server/node_modules
-
-
-  mongo-dev:
-    image: mongo:4.4.6-bionic
-    ports:
-      - "27017:27017"
-
 
 
   db-dev:

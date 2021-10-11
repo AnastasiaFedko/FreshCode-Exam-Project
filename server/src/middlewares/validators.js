@@ -1,5 +1,4 @@
 const schems = require('../validationSchemes/schems');
-const ServerError = require('../errors/ServerError');
 const BadRequestError = require('../errors/BadRequestError');
 
 module.exports.validateRegistrationData = async (req, res, next) => {
@@ -12,11 +11,21 @@ module.exports.validateRegistrationData = async (req, res, next) => {
 };
 
 module.exports.validateLogin = async (req, res, next) => {
+  const token = req.body.token;
+  const validationResult = await schems.loginSchem.isValid(req.body);
+  if (validationResult || token) {
+    next();
+  } else {
+    return next(new BadRequestError('Invalid data for login'));
+  }
+};
+
+module.exports.validatePasswordRecover = async (req, res, next) => {
   const validationResult = await schems.loginSchem.isValid(req.body);
   if (validationResult) {
     next();
   } else {
-    return next(new BadRequestError('Invalid data for login'));
+    return next(new BadRequestError('Invalid data for password recover'));
   }
 };
 

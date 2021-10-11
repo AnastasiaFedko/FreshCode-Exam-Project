@@ -43,7 +43,7 @@ module.exports.canGetContest = async (req, res, next) => {
 };
 
 module.exports.onlyForCreative = (req, res, next) => {
-  if (req.tokenData.role === CONSTANTS.CUSTOMER) {
+  if (req.tokenData.role !== CONSTANTS.CREATOR) {
     next(new RightsError());
   } else {
     next();
@@ -52,8 +52,16 @@ module.exports.onlyForCreative = (req, res, next) => {
 };
 
 module.exports.onlyForCustomer = (req, res, next) => {
-  if (req.tokenData.role === CONSTANTS.CREATOR) {
+  if (req.tokenData.role !== CONSTANTS.CUSTOMER) {
     return next(new RightsError('this page only for customers'));
+  } else {
+    next();
+  }
+};
+
+module.exports.onlyForModerator = (req, res, next) => {
+  if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    return next(new RightsError('this page only for moderators'));
   } else {
     next();
   }
@@ -84,15 +92,21 @@ module.exports.canSendOffer = async (req, res, next) => {
 
 module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
   try {
-    const result = await bd.Contests.findOne({
-      where: {
-        userId: req.tokenData.userId,
-        id: req.body.contestId,
-        status: CONSTANTS.CONTEST_STATUS_ACTIVE,
-      },
-    });
-    if (!result) {
-      return next(new RightsError());
+    if(req.body.command === 'reject' || req.body.command === 'won'){
+      const result = await bd.Contests.findOne({
+        where: {
+          userId: req.tokenData.userId,
+          id: req.body.contestId,
+          status: CONSTANTS.CONTEST_STATUS_ACTIVE,
+        },
+      });
+      if (!result) {
+        return next(new RightsError());
+      }
+    } else if(req.body.command === CONSTANTS.OFFER_STATUS_DECLINED || req.body.command === CONSTANTS.OFFER_STATUS_CONFIRMED){
+      if(req.tokenData.role !== CONSTANTS.MODERATOR) {
+        return next(new RightsError('this page only for moderators'));
+      }
     }
     next();
   } catch (e) {

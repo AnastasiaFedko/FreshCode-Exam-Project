@@ -1,6 +1,6 @@
 import { takeLatest, takeLeading, takeEvery } from 'redux-saga/effects';
 import ACTION from '../actions/actionTypes';
-import { registerSaga, loginSaga } from './authSagas';
+import { registerSaga, loginSaga, recoverPasswordSaga } from './authSagas';
 import {
   privateSaga, updateUserData, notAuthorizeSaga, headerRequest,
 } from './userSaga';
@@ -13,7 +13,7 @@ import {
   getContestByIdSaga,
   downloadContestFileSaga,
 } from './contestsSagas';
-import { changeMarkSaga, setOfferStatusSaga, addOfferSaga } from './offerSagas';
+import { changeMarkSaga, setOfferStatusSaga, addOfferSaga, setOfferStatusByModeratorSaga, getOffersSaga } from './offerSagas';
 import {
   previewSaga,
   getDialog,
@@ -31,17 +31,20 @@ import {
 function* rootSaga() {
   yield takeLatest(ACTION.AUTH_ACTION_REGISTER, registerSaga);
   yield takeLatest(ACTION.AUTH_ACTION_LOGIN, loginSaga);
+  yield takeLatest(ACTION.RECOVER_PASSWORD_ACTION, recoverPasswordSaga);
   yield takeLatest(ACTION.PAYMENT_ACTION, paymentSaga);
   yield takeEvery(ACTION.GET_USER_ACTION, privateSaga);
   yield takeEvery(ACTION.GET_DATA_FOR_CONTEST_ACTION, dataForContestSaga);
   yield takeLatest(ACTION.CASHOUT_ACTION, cashoutSaga);
   yield takeLeading(ACTION.GET_CONTESTS_FOR_CUSTOMER, customerContestsSaga);
   yield takeLatest(ACTION.GET_CONTEST_BY_ID_ACTION, getContestByIdSaga);
+  yield takeLatest(ACTION.GET_OFFERS_FOR_MODERATOR_ACTION, getOffersSaga);
   yield takeEvery(ACTION.GET_CONTESTS_FOR_CREATIVE, activeContestsSaga);
   yield takeLatest(ACTION.DOWNLOAD_CONTEST_FILE_ACTION, downloadContestFileSaga);
   yield takeLatest(ACTION.UPDATE_CONTEST_ACTION, updateContestSaga);
   yield takeEvery(ACTION.SET_OFFER_ACTION, addOfferSaga);
   yield takeLatest(ACTION.SET_OFFER_STATUS_ACTION, setOfferStatusSaga);
+  yield takeLatest(ACTION.SET_OFFER_STATUS_BY_MODERATOR_ACTION, setOfferStatusByModeratorSaga);
   yield takeLatest(ACTION.CHANGE_MARK_ACTION, changeMarkSaga);
   yield takeLatest(ACTION.UPDATE_USER_DATA, updateUserData);
   yield takeLatest(ACTION.ONLY_FOR_NOT_AUTHORIZE_USERS, notAuthorizeSaga);
