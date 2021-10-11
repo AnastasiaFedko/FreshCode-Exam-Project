@@ -10,9 +10,7 @@ const sendEmail = require('../utils/sendEmail');
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
   try {
-    const {
-      body: { characteristic1, characteristic2 },
-    } = req;
+    const { body: { characteristic1, characteristic2 } } = req;
     console.log(req.body, characteristic1, characteristic2);
     const types = [characteristic1, characteristic2, 'industry'].filter(Boolean);
 
@@ -87,7 +85,7 @@ module.exports.getContestById = async (req, res, next) => {
     });
     res.send(contestInfo);
   } catch (e) {
-    next(new ServerError());
+    next(new ServerError(e.message));
   }
 };
 
