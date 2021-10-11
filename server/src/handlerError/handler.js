@@ -1,3 +1,7 @@
+const { ErrorLogger } = require("../errors/ErrorLogger");
+
+const errorLogger = new ErrorLogger();
+
 module.exports = (err, req, res, next) => {
   console.log(err);
   if (err.message ===
@@ -7,6 +11,7 @@ module.exports = (err, req, res, next) => {
     err.message = 'Not Enough money';
     err.code = 406;
   }
+  errorLogger.wrireError(err);
   if (!err.message || !err.code) {
     res.status(500).send('Server Error');
   } else {
