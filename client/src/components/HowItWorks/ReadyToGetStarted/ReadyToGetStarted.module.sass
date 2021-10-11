@@ -1,0 +1,53 @@
+.mainGradient
+    z-index: 2
+    background-image: linear-gradient(150deg,#2d1582 0%,#19a0ff 100%)
+    background-repeat: repeat-x
+    text-align: center!important
+    position: relative!important
+    overflow: hidden!important
+
+    .readyContainer
+        padding-bottom: 2rem!important
+        padding-top: 2rem!important
+        margin: 0 auto
+        flex-flow: column wrap
+        justify-content: center
+
+        h3
+            color: #00dffc!important
+            font-weight: 600!important
+            margin-bottom: 0.5rem!important
+            font-size: 2rem
+            line-height: 1.5
+            margin-top: 0
+
+        p
+            color: #fff!important
+            margin-bottom: 1rem!important
+            margin-top: 0
+            font-size: 1.25rem
+            font-weight: 300
+            line-height: 1.7
+
+        .startContest
+            background-color: #fff
+            border-color: #fff
+            border-radius: .3125rem
+            user-select: none
+            color: #1e2022
+            margin: 0 auto
+
+            &:hover
+                box-shadow: 0 4px 11px rgb(255, 255, 255)
+
+            &:active:focus
+                box-shadow: 0 0 0 0 transparent
+                background-color: #e6e6e6
+                border-color: #dfdfdf
+
+            &:hover:focus
+                transform: translateY(-3px)
+                box-shadow: 0 0 0 0 transparent
+
+            &:focus
+                outline: 0

@@ -5,7 +5,7 @@ import { payRequest, clearPaymentStore } from '../../actions/actionCreator';
 import PayForm from '../../components/PayForm/PayForm';
 import styles from './Payment.module.sass';
 import Error from '../../components/Error/Error';
-import Logo from '../../components/Logo'
+import Logo from '../../components/Logo';
 
 const Payment = (props) => {
   const pay = (values) => {
