@@ -1,11 +1,11 @@
 import { put, select } from 'redux-saga/effects';
 import ACTION from '../actions/actionTypes';
-import * as restController from '../api/rest/restController';
+import * as offerController from '../api/rest/offerController';
 import CONSTANTS from '../constants';
 
 export function* changeMarkSaga(action) {
   try {
-    const { data } = yield restController.changeMark(action.data);
+    const { data } = yield offerController.changeMark(action.data);
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {
       if (offer.User.id === data.userId) {
@@ -23,7 +23,7 @@ export function* changeMarkSaga(action) {
 
 export function* addOfferSaga(action) {
   try {
-    const { data } = yield restController.setNewOffer(action.data);
+    const { data } = yield offerController.setNewOffer(action.data);
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.unshift(data);
     yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data: offers });
@@ -34,7 +34,7 @@ export function* addOfferSaga(action) {
 
 export function* setOfferStatusSaga(action) {
   try {
-    const { data } = yield restController.setOfferStatus(action.data);
+    const { data } = yield offerController.setOfferStatus(action.data);
     const contestOffers = yield select((state) => state.contestByIdStore.offers);
     contestOffers.forEach((offer, index) => {
       if (data.status === CONSTANTS.OFFER_STATUS_WON) {
@@ -57,7 +57,7 @@ export function* setOfferStatusSaga(action) {
 }
 export function* setOfferStatusByModeratorSaga(action) {
   try {
-    const { data } = yield restController.setOfferStatus(action.data);
+    const { data } = yield offerController.setOfferStatus(action.data);
     const offers = yield select((state) => state.offersStore.offers);
 
     offers[offers.findIndex((offer) => offer.id === data.id)].status = data.status;
@@ -71,7 +71,7 @@ export function* setOfferStatusByModeratorSaga(action) {
 export function* getOffersSaga() {
   yield put({ type: ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST });
   try {
-    const { data } = yield restController.getOffers();
+    const { data } = yield offerController.getOffers();
     const { resOffers } = data;
     yield put({ type: ACTION.GET_OFFERS_FOR_MODERATOR_SUCCESS, data: resOffers });
   } catch (e) {

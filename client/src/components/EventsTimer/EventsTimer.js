@@ -23,6 +23,7 @@ const EventsTimer = (props) => {
             localStorage.setItem(`${userId}`, JSON.stringify(userEvents));
         }
         setEvents(getEvents());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [eventData])
 
 

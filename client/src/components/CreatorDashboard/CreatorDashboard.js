@@ -75,6 +75,10 @@ class CreatorDashboard extends React.Component {
     });
   };
 
+  componentWillUnmount() {
+    this.props.clearContestsList();
+  }
+
   changePredicate = ({ name, value }) => {
     const { creatorFilter } = this.props;
     this.props.newFilter({ [name]: value === 'Choose industry' ? null : value });

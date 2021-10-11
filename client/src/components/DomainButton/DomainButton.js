@@ -5,7 +5,6 @@ import classNames from 'classnames';
 const DomainButton = (props) => {
 
     const { buttonText, body, updateValue, checkedValue, buttonValue } = props;
-    console.log(props);
 
     const [ classList, setClasslist ] = useState( classNames(styles.buttonContainer, styles.activeButton))
 
@@ -20,8 +19,6 @@ const DomainButton = (props) => {
         ? classNames(styles.buttonContainer, styles.activeButton)
         : styles.buttonContainer) 
     }, [checkedValue, buttonValue])
-
-    console.log(classList);
 
     return (
         <div className={classList} onClick={onClickHandler}>

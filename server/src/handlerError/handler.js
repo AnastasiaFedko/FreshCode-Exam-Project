@@ -1,4 +1,4 @@
-const { ErrorLogger } = require("../errors/ErrorLogger");
+const { ErrorLogger } = require('../errors/ErrorLogger');
 
 const errorLogger = new ErrorLogger();
 

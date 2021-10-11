@@ -37,7 +37,7 @@ const EventItem = (props) => {
         return () => {
             clearTimeout(timerNotification);
         }
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
