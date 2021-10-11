@@ -1,0 +1,92 @@
+.container
+    box-shadow: 0 10px 40px 10px rgba(140,152,164,.175)
+    display: flex
+    flex-direction: column
+    padding: 20px
+    align-items: center
+    height: max-content
+    max-height: 550px
+    width: 40%
+    box-sizing: border-box
+    margin-bottom: 40px
+
+    @media (max-width: 1190px)
+        width: 35%
+
+    @media (max-width: 922px)
+        width: 80%
+
+    @media (max-width: 700px)
+        width: 90%
+
+    label
+        font-size: 18px
+        margin-bottom: 20px
+        display: inline-block
+
+    button
+        align-self: stretch
+        width: 350px
+        border-radius: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+        background-color: #28d2d0
+        height: 64px
+        padding: 0
+        border: 0
+        width: stretch
+        font-size: 16px
+        color: white
+
+        @media (max-width: 1190px)
+            width: 250px
+
+        @media (max-width: 922px)
+            width: 400px
+
+        @media (max-width: 600px)
+            width: 300px
+
+        @media(max-width: 850px)
+            align-self: auto
+
+    p
+        text-transform: uppercase
+        font-size: 22px
+        color: #495d8b
+        text-align: center
+        margin: 0 auto 20px auto
+
+.input
+    width: 350px
+    height: 40px
+    text-align: center
+    margin-bottom: 1rem
+    background-color: white
+    border-color: #6b89b0
+    border-radius: 4px
+    color: #9ca8b7
+    font-size: 16px
+    box-sizing: border-box
+
+    @media (max-width: 1190px)
+        width: 250px
+
+    @media (max-width: 922px)
+        width: 400px
+
+    @media (max-width: 600px)
+        width: 300px
+
+.warning
+    color: #ff7373
+    font-size: 14px
+    display: block
+    margin-bottom: 15px
+
+.notValid
+    border-color: #ff7373
+
+.valid
+    border-color: #00fffb
